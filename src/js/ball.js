@@ -1,7 +1,7 @@
 import Sprite from './sprite.js';
 export default class Ball extends Sprite{
 	constructor(game){
-		super();
+		super(game);
 		console.log("I'm a ball");
 	}
 }

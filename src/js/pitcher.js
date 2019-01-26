@@ -2,7 +2,7 @@ import Sprite from './sprite.js';
 export default class Pitcher extends Sprite{
 
 	constructor(game){
-		super();
+		super(game);
 		console.log("I'm a pitcher");
 
 			/* For calculating ball position */
