@@ -60,7 +60,7 @@ class Game{
             this.pitcher.draw(this.ctx);
             // Round Timer Update
             this.roundTimerTick();
-            
+
         }), this.tickTime;
     
 	}
@@ -71,7 +71,7 @@ class Game{
 		if(this.roundStarted){
 			if(this.RoundTime > 0){
 				this.RoundTime--;  // so this is 100ms
-				console.log(this.roundTime);
+				//console.log(this.roundTime);
 			}
 		}
 	}
