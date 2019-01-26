@@ -3,7 +3,7 @@ export default class Batter extends Sprite{
 
 	constructor(game){
 		super(game);
-		console.log("Made a Batter");
+		
 		this.game = game;
 
 		/* Bind Event Handlers */
@@ -16,17 +16,17 @@ export default class Batter extends Sprite{
 
 		/* Time at which bat is swung from roundTimer */
 		this.swingTime = null;
-		this.batterBoxLimitRight = 575;
-		this.batterBoxLimitLeft = 525;
+		this.batterBoxLimitRight = 550;
+		this.batterBoxLimitLeft = 500;
 
-		this.batterLocationX = 550;
+		this.batterLocationX = 515;
 		this.batterLocationY = 315;
 
 		/* bind */
 		this.keyDownAction.bind(this);
 		this.keyUpAction.bind(this);
 
-		console.log(this.batterLocationX + " x " + this.batterLocationY);
+	
 		
 		//http://www.williammalone.com/articles/create-html5-canvas-javascript-sprite-animation/
 		
@@ -44,7 +44,6 @@ export default class Batter extends Sprite{
 
 	}
 	draw(ctx){
-   			//ctx.drawImage(this.batterImages[0],this.batterLocationX,this.batterLocationY); // draw first batter image
    			ctx.drawImage(this.batterImages[0],
    			this.frameIndex * this.batterImages[0].width / 7, //
    			0, //
@@ -60,7 +59,6 @@ export default class Batter extends Sprite{
    			}
    	}
    	updateSwing() {
-   		console.log("update swing" + this.tickCount);
         this.tickCount += 1;
         if (this.tickCount > this.ticksPerFrame) {
         	this.tickCount = 1;
@@ -74,7 +72,6 @@ export default class Batter extends Sprite{
         }
     }
     startSwing(){
-    	console.log("starting swing"); 
     	this.swinging = true;
     	this.frameIndex = 0;
     	this.tickCount = 0;
@@ -93,9 +90,7 @@ export default class Batter extends Sprite{
 				this.batter.batterLocationX++;
 			}
 		}
-		
-
-	}
+ 	}
 	keyUpAction(e){
 		if(e.code == "Space"){
 		//	console.log("Up Space");

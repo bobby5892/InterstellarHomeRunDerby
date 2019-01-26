@@ -30,24 +30,20 @@ class Game{
         this.roundStarted = true;
     
 
-     /* Call Methods */
+	    /* Call Methods */
         /* stretch canvas */
         this.initCanvas();
 
          // Round Timer
         this.startRoundTimer();
 
-
         // Start Game Rendering  - Last Method
         this.animateGame();
 	}
-
 	initCanvas(){
-
 		this.canvas.width = 960;
 		this.canvas.height = 540;
 	}
-
 	animateGame(){
 		this.timer = setInterval(() => {
             // Clear the Canvas
@@ -62,7 +58,6 @@ class Game{
             this.roundTimerTick();
 
         }), this.tickTime;
-    
 	}
 	startRoundTimer(){
 		this.RoundTime = 6000;
@@ -76,17 +71,14 @@ class Game{
 		}
 	}
 	clearCanvas(){
-
          this.ctx.fillStyle = this.backgroundColor;
          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 	}
 }
-
 let game;
 window.addEventListener('load', () => {
 	game = new Game();
 });
-
 window.addEventListener('resize', () =>{
 	console.log("Window Changed");
 });
