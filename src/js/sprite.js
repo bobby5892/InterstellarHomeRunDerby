@@ -1,11 +1,11 @@
 export default class Sprite{
-	constructor(){
+	constructor(game){
 		/* Where on the canvas is it */
 		this.positionX = 0;
 		this.positionY = 0;
 		/* How fast is it going */
 		this.speed = 0;
-
+		
 		/* Where is it going */
 
 		this.destinationX = 0;
@@ -13,6 +13,9 @@ export default class Sprite{
 
 		/* Do we draw this in the canvas */
 		this.visible = false;
+
+		/* Center of Screen */
+		
 
 		
 	}
