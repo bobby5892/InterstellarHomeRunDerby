@@ -18,9 +18,11 @@ export default class Pitcher extends Sprite{
 	throwPitch(){
 		this.pitchStart = this.game.roundTime;
 		this.pitchSpeed = 10;
+
 		//this.pitchSpeed = math.floor((Math.random() * 10) + 1);
+
 	}
 	
 }
-/* Throws a pitch */
+
 
