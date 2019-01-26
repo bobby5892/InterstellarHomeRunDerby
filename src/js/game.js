@@ -2,15 +2,20 @@ import Batter from './batter.js';
 import Sprite from './sprite.js';
 import Pitcher from './pitcher.js';
 import Ball from './ball.js';
+import Platform from './platform.js';
 class Game{
-	constructor(){
+	constructor(game){
 		console.log("game.js");
 		this.canvas =  document.getElementsByTagName("canvas")[0];
         this.ctx    = this.canvas.getContext('2d');
 
-		this.batter = new Batter();
-		this.pitcher = new Pitcher();
-		this.ball = new Ball();
+        /* Refactor into array of sprites */
+
+		
+		this.batter = new Batter(this);
+		this.pitcher = new Pitcher(this);
+		this.ball = new Ball(this);
+		this.platform = new Platform(this);
 
 		/* Some Defaults */
 		this.backgroundColor = "#000000";
@@ -34,6 +39,8 @@ class Game{
             this.clearCanvas();
             // Draw the Batter
             this.batter.draw(this.ctx);
+            // Draw the platform
+            this.platform.draw(this.ctx);
 
         }), this.tickTime;
     

@@ -1,7 +1,7 @@
 import Sprite from './sprite.js';
 export default class Batter extends Sprite{
 
-	constructor(){
+	constructor(game){
 		super();
 		console.log("Made a Batter");
 
