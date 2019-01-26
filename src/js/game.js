@@ -2,6 +2,7 @@ import Batter from './batter.js';
 import Sprite from './sprite.js';
 import Pitcher from './pitcher.js';
 import Ball from './ball.js';
+
 import Platform from './platform.js';
 class Game{
 	constructor(game){
@@ -29,10 +30,12 @@ class Game{
         // Start Game Rendering
         this.animateGame();
 	}
+
 	initCanvas(){
 		this.canvas.width = window.innerWidth;
 		this.canvas.height = window.innerHeight;
 	}
+
 	animateGame(){
 		this.timer = setInterval(() => {
             // Clear the Canvas
