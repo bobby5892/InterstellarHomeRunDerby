@@ -7,19 +7,7 @@ export default class Pitcher extends Sprite{
 
 			/* For calculating ball position */
 			this.throwSpeed = null;
-
-		
-		}
-
 	}
-
+}
 /* Throws a pitch */
-throwPitch(){
-	/*
 
-	*/
-	
-	}
-}
-	
-}

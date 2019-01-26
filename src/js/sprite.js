@@ -16,7 +16,7 @@ export default class Sprite{
 
 		/* Center of Screen */
 		
-
+		this.game = game;
 		
 	}
 }
