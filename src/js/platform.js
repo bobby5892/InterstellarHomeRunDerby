@@ -19,6 +19,6 @@ export default class Platform extends Sprite{
 		
 	}
 	draw(ctx){
-   			ctx.drawImage(this.platformImages[0],this.centerX+(this.platformImages[0].width/2),this.game.canvas.height-this.platformImages[0].height); // draw first batter image
+   			ctx.drawImage(this.platformImages[0],300,430); // draw first batter image
 	}
 }

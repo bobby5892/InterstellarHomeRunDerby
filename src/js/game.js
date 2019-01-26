@@ -43,21 +43,24 @@ class Game{
 	}
 
 	initCanvas(){
-		this.canvas.width = window.innerWidth;
-		this.canvas.height = window.innerHeight;
+
+		this.canvas.width = 960;
+		this.canvas.height = 540;
 	}
 
 	animateGame(){
 		this.timer = setInterval(() => {
             // Clear the Canvas
             this.clearCanvas();
+             // Draw the platform
+            this.platform.draw(this.ctx);
             // Draw the Batter
             this.batter.draw(this.ctx);
-            // Draw the platform
-            this.platform.draw(this.ctx);
-
+            // Draw the pitcher
+            this.pitcher.draw(this.ctx);
             // Round Timer Update
             this.roundTimerTick();
+            
         }), this.tickTime;
     
 	}

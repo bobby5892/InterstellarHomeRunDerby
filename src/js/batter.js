@@ -4,11 +4,11 @@ export default class Batter extends Sprite{
 	constructor(game){
 		super(game);
 		console.log("Made a Batter");
-
+		this.game = game;
 
 		/* Bind Event Handlers */
-		window.addEventListener('keydown', this.keyDownAction);
-		window.addEventListener('keyup', this.keyUpAction);
+		window.addEventListener('keydown', this.keyDownAction.bind(this.game));
+		window.addEventListener('keyup',   this.keyUpAction.bind(this.game));
 
 		/* Will hold an array of prerendered batting images */
 		this.batterImages = null;
@@ -16,6 +16,17 @@ export default class Batter extends Sprite{
 
 		/* Time at which bat is swung from roundTimer */
 		this.swingTime = null;
+		this.batterBoxLimitRight = 500;
+		this.batterBoxLimitLeft = 300;
+
+		this.batterLocationX = 550;
+		this.batterLocationY = 300;
+
+		/* bind */
+		this.keyDownAction.bind(this);
+		this.keyUpAction.bind(this);
+
+		console.log(this.batterLocationX + " x " + this.batterLocationY);
 	}
 	loadImages(){
 		this.batterImages = [];
@@ -25,13 +36,21 @@ export default class Batter extends Sprite{
 		this.batterImages.push(drawing);
 	}
 	draw(ctx){
-   			ctx.drawImage(this.batterImages[0],0,0); // draw first batter image
-	}
-	keyDownAction(e){
+   			ctx.drawImage(this.batterImages[0],this.batterLocationX,this.batterLocationY); // draw first batter image
+   	}
+	keyDownAction(e,batter){
 		if(e.code == "Space"){
-			console.log("Down Space");
+			
 		}
-		//console.log("keydown"+ ` ${e.code}`);
+		if(e.code == "ArrowLeft"){
+			this.batter.batterLocationX--;
+			
+		}
+		if(e.code == "ArrowRight"){
+			this.batter.batterLocationX++;
+			
+		}
+		
 
 	}
 	keyUpAction(e){
