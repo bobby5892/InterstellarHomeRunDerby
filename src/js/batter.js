@@ -2,7 +2,7 @@ import Sprite from './sprite.js';
 export default class Batter extends Sprite{
 
 	constructor(game){
-		super();
+		super(game);
 		console.log("Made a Batter");
 
 
@@ -22,9 +22,7 @@ export default class Batter extends Sprite{
 
 		let drawing = new Image();
 		drawing.src = "./dist/images/batter.png"; // can also be a remote URL e.g. http://
-
 		this.batterImages.push(drawing);
-		
 	}
 	draw(ctx){
    			ctx.drawImage(this.batterImages[0],0,0); // draw first batter image

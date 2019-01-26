@@ -1,5 +1,6 @@
 export default class Sprite{
 	constructor(game){
+		this.game = game;
 		/* Where on the canvas is it */
 		this.positionX = 0;
 		this.positionY = 0;
@@ -15,7 +16,8 @@ export default class Sprite{
 		this.visible = false;
 
 		/* Center of Screen */
-		
+		this.centerX = this.game.canvas.width/2;
+		this.centerY = this.game.canvas.height/2;
 
 		
 	}

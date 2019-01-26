@@ -25,9 +25,20 @@ class Game{
 		this.timer = null;
         this.tickTime = 100;
 
+        this.RoundTime = 0;
+ 		// Round has begun
+        this.roundStarted = true;
+    
+
+     /* Call Methods */
         /* stretch canvas */
         this.initCanvas();
-        // Start Game Rendering
+
+         // Round Timer
+        this.startRoundTimer();
+
+
+        // Start Game Rendering  - Last Method
         this.animateGame();
 	}
 
@@ -45,8 +56,21 @@ class Game{
             // Draw the platform
             this.platform.draw(this.ctx);
 
+            // Round Timer Update
+            this.roundTimerTick();
         }), this.tickTime;
     
+	}
+	startRoundTimer(){
+		this.RoundTime = 6000;
+	}
+	roundTimerTick(){
+		if(this.roundStarted){
+			if(this.RoundTime > 0){
+				this.RoundTime--;  // so this is 100ms
+				console.log(this.roundTime);
+			}
+		}
 	}
 	clearCanvas(){
 
