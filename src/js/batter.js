@@ -13,6 +13,9 @@ export default class Batter extends Sprite{
 		/* Will hold an array of prerendered batting images */
 		this.batterImages = null;
 		this.loadImages();
+
+		/* Time at which bat is swung from roundTimer */
+		this.swingTime = null;
 	}
 	loadImages(){
 		this.batterImages = [];
@@ -36,6 +39,10 @@ export default class Batter extends Sprite{
 	keyUpAction(e){
 		if(e.code == "Space"){
 			console.log("Up Space");
+
+			/* set swingTime to roundTimer
+				swingTime = swingTime - game.pitcher.pitchStart 
+				call ballHit*/
 		}
 		//console.log("keyup" + ` ${e.code}`);
 	}
