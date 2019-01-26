@@ -17,9 +17,9 @@ export default class Batter extends Sprite{
 		/* Time at which bat is swung from roundTimer */
 		this.swingTime = null;
 		this.batterBoxLimitRight = 550;
-		this.batterBoxLimitLeft = 500;
+		this.batterBoxLimitLeft = 470;
 
-		this.batterLocationX = 515;
+		this.batterLocationX = 480;
 		this.batterLocationY = 315;
 
 		/* bind */
@@ -57,6 +57,7 @@ export default class Batter extends Sprite{
    			if(this.swinging){
    				this.updateSwing();
    			}
+   			this.checkHit();
    	}
    	updateSwing() {
         this.tickCount += 1;
@@ -76,29 +77,42 @@ export default class Batter extends Sprite{
     	this.frameIndex = 0;
     	this.tickCount = 0;
     }
-	keyDownAction(e,batter){
-		if(e.code == "Space"){
-			this.batter.startSwing();
+    checkHit(){
+
+		if(this.frameIndex == 5){
+			console.log("checking hit" + this.game.ball.ballY);
+			if(this.game.ball.ballY > 280  && this.game.ball.ballY < 330){
+				console.log("Hit");
+			}
 		}
-		if(e.code == "ArrowLeft"){
+	}
+	keyDownAction(e,batter){
+
+		if(e.code == "Space" || e.code == "KeyW"){
+			this.batter.startSwing();
+			
+		}
+		if(e.code == "ArrowLeft" || e.code == "KeyA"){
 			if(this.batter.batterLocationX > this.batter.batterBoxLimitLeft){
 				this.batter.batterLocationX--;
 			}
 		}
-		if(e.code == "ArrowRight"){
+		if(e.code == "ArrowRight" || e.code == "KeyD"){
 			if(this.batter.batterLocationX < this.batter.batterBoxLimitRight){
 				this.batter.batterLocationX++;
 			}
 		}
  	}
 	keyUpAction(e){
+		//console.log(e.code);
 		if(e.code == "Space"){
-		//	console.log("Up Space");
-
+			console.log("Up Space");
+			console.log("Ball Y:" + this.batter.game.ball.ballY);
 			/* set swingTime to roundTimer
 				swingTime = swingTime - game.pitcher.pitchStart 
 				call ballHit*/
 		}
+
 		//console.log("keyup" + ` ${e.code}`);
 	}
 

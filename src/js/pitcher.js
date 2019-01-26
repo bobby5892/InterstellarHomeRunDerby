@@ -31,7 +31,7 @@ export default class Pitcher extends Sprite{
 			this.pitcherY = 20;
 
 			/* how often to pitch*/
-			this.pitchInterval = 1000;
+			this.pitchInterval = 800;
 			this.loadImages();
 
 	}
@@ -69,6 +69,7 @@ export default class Pitcher extends Sprite{
 		this.pitcherImages.push(drawing);
 		
 	}
+	
 	draw(ctx){
    		//	ctx.drawImage(this.platformImages[0],500,40); // draw first batter image
    			ctx.drawImage(this.pitcherImages[0],
