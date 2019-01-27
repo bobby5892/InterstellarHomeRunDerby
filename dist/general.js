@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "63d43666c44f12e5d767"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "815ca55b7ec743bf3121"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -743,7 +743,6 @@ var Viewport = function () {
 
 		this.canvas = document.getElementsByTagName("canvas")[0];
 		this.viewport_meta = document.getElementById('viewport-meta');
-
 		this.setViewport();
 	}
 

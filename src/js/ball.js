@@ -11,7 +11,7 @@ export default class Ball extends Sprite{
 		this.Ydelta = 1;
 
 		this.balling = false;
-		this.frameIndex = 0;
+		this.frameIndex = 7;
 		this.tickCount = 0;
 		this.ticksPerFrame = 85;
 
@@ -70,13 +70,11 @@ export default class Ball extends Sprite{
         	this.frameIndex = 7;
         	this.hitAnimation = false;
         	// This only runs once so lets show the homerun
-
-
         }
         if(this.isHomeRun){
             this.startHomeRun();
           }
-        this.positionY -= this.Ydelta*2;
+        this.positionY -= this.Ydelta*3;
     }
     startHomeRun(){
     	this.showHomeRun = true;
@@ -128,6 +126,7 @@ export default class Ball extends Sprite{
   			// Stop the ball
   			if(this.positionY > window.innerHeight){
   				this.balling = false;
+          this.frameIndex = 7;
 			}
   	}
 }

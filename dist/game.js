@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "63d43666c44f12e5d767"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "815ca55b7ec743bf3121"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -1072,10 +1072,6 @@ var Batter = function (_Sprite) {
 		_this.positionX = 480;
 		_this.positionY = 315;
 
-		/* bind */
-		_this.keyDownAction.bind(_this);
-		_this.keyUpAction.bind(_this);
-
 		_this.throwIsHit = false;
 		//http://www.williammalone.com/articles/create-html5-canvas-javascript-sprite-animation/
 
@@ -1142,30 +1138,47 @@ var Batter = function (_Sprite) {
 	}, {
 		key: 'startSwing',
 		value: function startSwing() {
-			this.swinging = true;
-			this.frameIndex = 0;
-			this.tickCount = 0;
+			/* prevent animation from restarting from mashing keys */
+			if (this.frameIndex == 0) {
+				this.swinging = true;
+				this.frameIndex = 0;
+				this.tickCount = 0;
+			}
 		}
 	}, {
 		key: 'yellFoul',
 		value: function yellFoul() {
-
 			this.game.ctx.drawImage(this.batterImages[1], 440, 250);
 		}
 	}, {
 		key: 'checkHit',
 		value: function checkHit() {
 			if (this.frameIndex == 5) {
-				if (this.game.ball.positionY > 290 && this.game.ball.positionY < 340) {
+				// Home Run - strong hit
+				if (this.game.ball.positionY > 300 && this.game.ball.positionY < 315) {
+					if (!this.throwIsHit) {
+						this.throwIsHit = true;
+						this.game.ball.balling = false;
+						this.game.ball.frameIndex = -1;
+						this.game.roundScore += 5;
+						this.game.roundTime += 1250;
+						this.game.audio[2].play();
+						this.game.ball.isHomeRun = true;
+						this.startHitAnimation(this.game.ball.positionX, this.game.ball.positionY);
+					}
+				}
+				// Home Run barely
+				if (this.game.ball.positionY > 280 && this.game.ball.positionY < 335) {
 					if (!this.throwIsHit) {
 						this.throwIsHit = true;
 						this.game.ball.balling = false;
 						this.game.ball.frameIndex = -1;
 						this.game.roundScore += 1;
+						this.game.roundTime += 700;
 						this.game.audio[2].play();
 						this.startHitAnimation(this.game.ball.positionX, this.game.ball.positionY);
 					}
-				} else if (this.game.ball.positionY > 200 && this.game.ball.positionY < 269 || this.game.ball.positionY > 321 && this.game.ball.positionY < 350) {
+				} else if (this.game.ball.positionY > 260 && this.game.ball.positionY < 262 || this.game.ball.positionY > 336 && this.game.ball.positionY < 350) {
 					if (!this.throwIsHit) {
 						this.throwIsHit = true;
 						this.foultimer = this.maxShowFoulTimer;
@@ -1190,7 +1203,6 @@ var Batter = function (_Sprite) {
 			}
 			/* For Keyboard / Mouse */
 			if (e.code == "Space" || e.code == "KeyW") {
-				//console.log("space" + this.batter.game.roundTime);
 				if (this.batter.game.roundTime <= 0) {
 					if (this.batter.game.firstload) {
 						this.batter.game.firstload = false;
@@ -1212,16 +1224,9 @@ var Batter = function (_Sprite) {
 	}, {
 		key: 'keyUpAction',
 		value: function keyUpAction(e) {
-			//console.log(e.code);
 			if (e.code == "Space" || e.code == "KeyW") {
-				//console.log(this.batter.game.ball.positionY);
 				this.batter.startSwing();
-				/* set swingTime to roundTimer
-    	swingTime = swingTime - game.pitcher.pitchStart 
-    	call ballHit*/
 			}
-
-			//console.log("keyup" + ` ${e.code}`);
 		}
 	}, {
 		key: 'startHitAnimation',
@@ -1301,6 +1306,8 @@ var Pitcher = function (_Sprite) {
 						_this.pitchInterval = 800;
 						_this.loadImages();
 
+						_this.maxSpeedIncrease = 0.6;
+						_this.minSpeedIncrease = 0.1;
 						return _this;
 			}
 
@@ -1324,18 +1331,17 @@ var Pitcher = function (_Sprite) {
 						}
 						// Animation
 
-			}, {
-						key: "startPitch",
-						value: function startPitch() {
-									this.tickCount = 5;
-									this.pitching = true;
-									this.game.batter.throwIsHit = false;
-						}
+
 			}, {
 						key: "throwPitch",
 						value: function throwPitch() {
 									this.pitchSpeed = 10;
-									this.startPitch();
+									this.tickCount = 5;
+									this.pitching = true;
+									this.game.batter.throwIsHit = false;
+									this.game.ball.isHomeRun = false;
+									this.game.ball.Ydelta = 1 + (Math.random() * (this.maxSpeedIncrease - this.minSpeedIncrease) + this.minSpeedIncrease);
+									console.log(this.game.ball.Ydelta);
 						}
 			}, {
 						key: "loadImages",
@@ -1423,6 +1429,9 @@ var Ball = function (_Sprite) {
     _this.showHomeRun = false;
     _this.showHomeRunTimeRemaining = 0;
 
+    /* Is the current hit a homerun*/
+    _this.isHomeRun = false;
+
     return _this;
   }
 
@@ -1476,6 +1485,9 @@ var Ball = function (_Sprite) {
         this.frameIndex = 7;
         this.hitAnimation = false;
         // This only runs once so lets show the homerun
+
+      }
+      if (this.isHomeRun) {
         this.startHomeRun();
       }
       this.positionY -= this.Ydelta * 2;

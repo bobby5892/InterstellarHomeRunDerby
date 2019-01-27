@@ -4,37 +4,35 @@ export default class Pitcher extends Sprite{
 	constructor(game){
 		super(game);
 		this.game = game;
-			
-			/* For calculating ball position */
-			this.throwSpeed = null;
+		this.pitchThrown = true;
+	
+		//  Storage of actual loaded images
+		this.pitcherImages = null;
+		// For Animation
+		this.pitchTime = null;
+		
+		this.frameIndex = 0;
+		this.tickCount = 0;
+		this.ticksPerFrame = 20;
 
-			this.pitchThrown = true;
+		this.pitching = false;
 
-			/* For calculating where the pitch is*/
-			this.pitchStart = null;
-			this.pitchSpeed = null;
+		/* pitcher location */
+		this.positionX = 480;
+		this.positionY = 20;
 
-			//  Storage of actual loaded images
-			this.pitcherImages = null;
-			// For Animation
-			this.pitchTime = null;
-			
-			this.frameIndex = 0;
-			this.tickCount = 0;
-			this.ticksPerFrame = 20;
+		/* how often to pitch*/
+		this.pitchInterval = 800;
+		
 
-			this.pitching = false;
+		/* speed of pitch */
+		this.maxSpeedIncrease = 0.6;
+		this.minSpeedIncrease = 0.1;
 
-			/* pitcher location */
-			this.positionX = 480;
-			this.positionY = 20;
-
-			/* how often to pitch*/
-			this.pitchInterval = 800;
-			this.loadImages();
-
-			this.maxSpeedIncrease = 0.6;
-			this.minSpeedIncrease = 0.1;
+		/* interval between pitches*/
+		this.maxPitchTime = 850;
+		this.minPitchTime = 700;
+		this.loadImages();
 	}
 	updatePitch() {
 		// 0,6,7,8,9,10
@@ -57,13 +55,16 @@ export default class Pitcher extends Sprite{
   
 
 	throwPitch(){
-		this.pitchSpeed = 10;
-		this.tickCount = 5;
-    	this.pitching = true;
-    	this.game.batter.throwIsHit = false;
-    	this.game.ball.isHomeRun = false;
-    	this.game.ball.Ydelta = 1 + ( Math.random() * (this.maxSpeedIncrease - this.minSpeedIncrease) + this.minSpeedIncrease);
-    	console.log(this.game.ball.Ydelta);
+		if(this.game.ball.frameIndex == 7){
+			this.pitchSpeed = 10;
+			this.tickCount = 5;
+	    	this.pitching = true;
+	    	this.game.batter.throwIsHit = false;
+	    	this.game.ball.isHomeRun = false;
+	    	this.game.ball.Ydelta = 1 + ( Math.random() * (this.maxSpeedIncrease - this.minSpeedIncrease) + this.minSpeedIncrease);
+	    	this.pitchInterval =  Math.ceil( Math.random() * (this.maxPitchTime  - this.minPitchTime ) + this.minPitchTime);
+
+	    }
     }
 	loadImages(){
 		this.pitcherImages = [];
