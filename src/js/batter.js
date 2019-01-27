@@ -24,11 +24,6 @@ export default class Batter extends Sprite{
 		this.positionX = 480;
 		this.positionY = 315;
 
-		/* bind */
-		this.keyDownAction.bind(this);
-		this.keyUpAction.bind(this);
-
-	
 		this.throwIsHit = false;
 		//http://www.williammalone.com/articles/create-html5-canvas-javascript-sprite-animation/
 		
@@ -71,7 +66,6 @@ export default class Batter extends Sprite{
    				this.yellFoul();
    				this.foultimer -= 1;
    			}
-   			
    	}
    	updateSwing() {
         this.tickCount += 1;
@@ -93,10 +87,8 @@ export default class Batter extends Sprite{
 	    	this.frameIndex = 0;
 	    	this.tickCount = 0;
 	    }
-    	
     }
     yellFoul(){
-
 		this.game.ctx.drawImage(this.batterImages[1],440,250);
     }
     checkHit(){
@@ -115,20 +107,19 @@ export default class Batter extends Sprite{
 				}
 			}
 			// Home Run barely
-			if(this.game.ball.positionY > 290  && this.game.ball.positionY < 340){
+			if(this.game.ball.positionY > 280  && this.game.ball.positionY < 335){
 				if(!this.throwIsHit){
 					this.throwIsHit = true;
 					this.game.ball.balling=false;
 					this.game.ball.frameIndex=-1;
 					this.game.roundScore +=1;
-					this.game.roundTime += 1250;
+					this.game.roundTime += 700;
 					this.game.audio[2].play();
 					this.startHitAnimation(this.game.ball.positionX,this.game.ball.positionY);
 				}
 			}
-
-			else if((this.game.ball.positionY > 200  && this.game.ball.positionY < 269) || 
-				(this.game.ball.positionY > 321  && this.game.ball.positionY < 350)){
+			else if((this.game.ball.positionY > 260  && this.game.ball.positionY < 262) || 
+				(this.game.ball.positionY > 336  && this.game.ball.positionY < 350)){
 				if(!this.throwIsHit){
 					this.throwIsHit = true;
 					this.foultimer = this.maxShowFoulTimer;
@@ -151,14 +142,12 @@ export default class Batter extends Sprite{
 		}
 		/* For Keyboard / Mouse */
 		if(e.code == "Space" || e.code == "KeyW"){
-			//console.log("space" + this.batter.game.roundTime);
 			if(this.batter.game.roundTime <= 0){
 				if(this.batter.game.firstload){
 					this.batter.game.firstload = false;
 				}
 				this.batter.game.startGame();
 			}
-			
 		}
 		if(e.code == "ArrowLeft" || e.code == "KeyA"){
 			if(this.batter.positionX > this.batter.batterBoxLimitLeft){
@@ -172,16 +161,9 @@ export default class Batter extends Sprite{
 		}
  	}
 	keyUpAction(e){
-		//console.log(e.code);
 		if(e.code == "Space" || e.code == "KeyW"){
-			//console.log(this.batter.game.ball.positionY);
 			this.batter.startSwing();
-			/* set swingTime to roundTimer
-				swingTime = swingTime - game.pitcher.pitchStart 
-				call ballHit*/
 		}
-
-		//console.log("keyup" + ` ${e.code}`);
 	}
 	startHitAnimation(x,y){
 		this.game.ball.balling = false;

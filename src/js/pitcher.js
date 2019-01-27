@@ -33,6 +33,8 @@ export default class Pitcher extends Sprite{
 			this.pitchInterval = 800;
 			this.loadImages();
 
+			this.maxSpeedIncrease = 0.6;
+			this.minSpeedIncrease = 0.1;
 	}
 	updatePitch() {
 		// 0,6,7,8,9,10
@@ -52,16 +54,17 @@ export default class Pitcher extends Sprite{
         }
     }
     // Animation
-    startPitch(){
-    	this.tickCount = 5;
+  
+
+	throwPitch(){
+		this.pitchSpeed = 10;
+		this.tickCount = 5;
     	this.pitching = true;
     	this.game.batter.throwIsHit = false;
     	this.game.ball.isHomeRun = false;
+    	this.game.ball.Ydelta = 1 + ( Math.random() * (this.maxSpeedIncrease - this.minSpeedIncrease) + this.minSpeedIncrease);
+    	console.log(this.game.ball.Ydelta);
     }
-	throwPitch(){
-		this.pitchSpeed = 10;
-		this.startPitch();
-	}
 	loadImages(){
 		this.pitcherImages = [];
 		let drawing = new Image();

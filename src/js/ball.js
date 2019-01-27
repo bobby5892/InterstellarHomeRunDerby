@@ -70,11 +70,12 @@ export default class Ball extends Sprite{
         	this.frameIndex = 7;
         	this.hitAnimation = false;
         	// This only runs once so lets show the homerun
-        	if(this.isHomeRun){
-            this.startHomeRun();
-          }
+
 
         }
+        if(this.isHomeRun){
+            this.startHomeRun();
+          }
         this.positionY -= this.Ydelta*2;
     }
     startHomeRun(){
