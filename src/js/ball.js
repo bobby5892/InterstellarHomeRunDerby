@@ -16,6 +16,8 @@ export default class Ball extends Sprite{
 		this.tickCount = 0;
 		this.ticksPerFrame = 85;
 
+		/* Hit Animation for Ball leaving bottom of screen going towards top */
+		this.hitAnimation = false;
 
 
 	}
@@ -43,6 +45,27 @@ export default class Ball extends Sprite{
         }
         this.ballY += this.Ydelta;
     }
+    updateHitAnimation(){
+    	this.tickCount += 1;
+        if (this.tickCount > this.ticksPerFrame) {
+        	this.tickCount = 1;
+            // Go to the next frame
+           	this.frameIndex = 0;
+        }
+        // Stop swinging at end of animation
+        if(this.frameIndex == 0){
+        	this.frameIndex = 1;
+        }
+      	else{
+      		this.frameIndex = 0;
+      	}
+        /* stop */
+        if(this.ballY < -90){
+        	this.frameIndex = 7;
+        	this.hitAnimation = false;
+        }
+        this.ballY -= this.Ydelta*2;
+    }
 	startBalling(){
 		this.balling = true;
 		this.frameIndex=6;
@@ -67,6 +90,9 @@ export default class Ball extends Sprite{
 
    			if(this.balling){
    				this.updateBall();
+   			}
+   			if(this.hitAnimation){
+   				this.updateHitAnimation();
    			}
    			// Trigger Pitches if game is playing
    			if(this.game.roundStarted && this.game.roundTime%this.game.pitcher.pitchInterval == 0){

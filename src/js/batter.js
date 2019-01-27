@@ -97,18 +97,19 @@ export default class Batter extends Sprite{
     checkHit(){
 		if(this.frameIndex == 5){
 			if(this.game.ball.ballY > 270  && this.game.ball.ballY < 320){
-				console.log("hit" + this.throwIsHit);
+				//console.log("hit" + this.throwIsHit);
 				if(!this.throwIsHit){
 					this.throwIsHit = true;
 					this.game.ball.balling=false;
 					this.game.ball.frameIndex=-1;
 					this.game.roundScore +=1;
+					this.startHitAnimation(this.game.ball.ballX,this.game.ball.ballY);
 				}
 			}
 			else if((this.game.ball.ballY > 200  && this.game.ball.ballY < 269) || 
 				(this.game.ball.ballY > 321  && this.game.ball.ballY < 350)){
 				if(!this.throwIsHit){
-					console.log("fouler");
+					//console.log("fouler");
 					this.throwIsHit = true;
 					this.foultimer = this.maxShowFoulTimer;
 					this.yellFoul();
@@ -117,9 +118,12 @@ export default class Batter extends Sprite{
 		}
 	}
 	keyDownAction(e,batter){
-
 		if(e.code == "Space" || e.code == "KeyW"){
-		
+			//console.log("space" + this.batter.game.roundTime);
+			if(this.batter.game.roundTime == 0){
+			//	console.log("timer done");
+				this.batter.game.startGame();
+			}
 			
 		}
 		if(e.code == "ArrowLeft" || e.code == "KeyA"){
@@ -145,5 +149,10 @@ export default class Batter extends Sprite{
 
 		//console.log("keyup" + ` ${e.code}`);
 	}
-
+	startHitAnimation(x,y){
+		this.game.ball.balling = false;
+		this.game.ball.hitAnimation = true;
+		this.game.ball.ballX = x;
+		this.game.ball.ballY = y;
+	}
 }

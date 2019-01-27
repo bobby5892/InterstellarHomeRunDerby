@@ -71,6 +71,11 @@ class Game{
 
         }), this.tickTime;
 	}
+	startGame(){
+		this.startroundTimer();
+		this.roundStarted = true;
+		this.roundScore = 0;
+	}
 	startroundTimer(){
 		this.roundTime = 6000;
 	}
