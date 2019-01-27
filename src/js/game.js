@@ -6,7 +6,6 @@ import Scoreboard from './scoreboard.js';
 import Platform from './platform.js';
 class Game{
 	constructor(game){
-		console.log("game.js");
 		this.canvas =  document.getElementsByTagName("canvas")[0];
         this.ctx    = this.canvas.getContext('2d');
 

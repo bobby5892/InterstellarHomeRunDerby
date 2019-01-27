@@ -4,7 +4,8 @@ export default class Platform extends Sprite{
 		super(game);
 		this.game = game;
 		this.platformImages = null;
-
+		this.positionX = 270;
+		this.positionY = 430;
 		this.loadImages();
 	}
 	loadImages(){
@@ -16,6 +17,6 @@ export default class Platform extends Sprite{
 		
 	}
 	draw(ctx){
-   			ctx.drawImage(this.platformImages[0],270,430); // draw first batter image
+   			ctx.drawImage(this.platformImages[0],this.positionX,this.positionY); // draw first batter image
 	}
 }

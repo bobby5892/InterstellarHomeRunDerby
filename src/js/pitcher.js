@@ -3,7 +3,6 @@ export default class Pitcher extends Sprite{
 
 	constructor(game){
 		super(game);
-		console.log("I'm a pitcher");
 		this.game = game;
 			
 			/* For calculating ball position */
@@ -27,8 +26,8 @@ export default class Pitcher extends Sprite{
 			this.pitching = false;
 
 			/* pitcher location */
-			this.pitcherX = 480;
-			this.pitcherY = 20;
+			this.positionX = 480;
+			this.positionY = 20;
 
 			/* how often to pitch*/
 			this.pitchInterval = 800;
@@ -61,26 +60,21 @@ export default class Pitcher extends Sprite{
 	throwPitch(){
 		this.pitchSpeed = 10;
 		this.startPitch();
-
 	}
 	loadImages(){
 		this.pitcherImages = [];
 		let drawing = new Image();
-		drawing.src = "./dist/images/pitcher.png"; // can also be a remote URL e.g. http://
-
+		drawing.src = "./dist/images/pitcher.png"; 
 		this.pitcherImages.push(drawing);
-		
 	}
-
 	draw(ctx){
-   		//	ctx.drawImage(this.platformImages[0],500,40); // draw first batter image
    			ctx.drawImage(this.pitcherImages[0],
    			this.frameIndex * this.pitcherImages[0].width / 11, //
    			0, //
    			90, // 1314 / 7
    			120, //
-   			this.pitcherX, // 
-   			this.pitcherY, //
+   			this.positionX, // 
+   			this.positionY, //
    			90,//
    			120 ); //
 

@@ -2,11 +2,10 @@ import Sprite from './sprite.js';
 export default class Ball extends Sprite{
 	constructor(game){
 		super(game);
-		console.log("I'm a ball");
 
 		this.ballImages = null;
-		this.ballX = -100;
-		this.ballY = -100;
+		this.positionX = -100;
+		this.positionY = -100;
 		this.loadImages();
 
 		this.Ydelta = 1;
@@ -47,7 +46,7 @@ export default class Ball extends Sprite{
         	this.frameIndex = 7;
         	this.balling = false;
         }
-        this.ballY += this.Ydelta;
+        this.positionY += this.Ydelta;
     }
     updateHitAnimation(){
     	this.tickCount += 1;
@@ -64,14 +63,14 @@ export default class Ball extends Sprite{
       		this.frameIndex = 0;
       	}
         /* stop */
-        if(this.ballY < -90){
+        if(this.positionY < -90){
         	this.frameIndex = 7;
         	this.hitAnimation = false;
         	// This only runs once so lets show the homerun
         	this.startHomeRun();
 
         }
-        this.ballY -= this.Ydelta*2;
+        this.positionY -= this.Ydelta*2;
     }
     startHomeRun(){
     	this.showHomeRun = true;
@@ -88,8 +87,8 @@ export default class Ball extends Sprite{
 		this.balling = true;
 		this.frameIndex=6;
 		/* Starting Location */
-		this.ballX = 490;
-		this.ballY = -20;
+		this.positionX = 490;
+		this.positionY = -20;
 
 		this.destinationX = 480;
 		this.destinationY = 540;
@@ -101,8 +100,8 @@ export default class Ball extends Sprite{
    			0, //
    			50, // 1314 / 7
    			90, //
-   			this.ballX, // 
-   			this.ballY, //
+   			this.positionX, // 
+   			this.positionY, //
    			50,//
    			90 ); //
 
@@ -121,7 +120,7 @@ export default class Ball extends Sprite{
   			}
 
   			// Stop the ball
-  			if(this.BallY > window.innerHeight){
+  			if(this.positionY > window.innerHeight){
   				this.balling = false;
 			}
   	}

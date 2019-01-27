@@ -5,7 +5,6 @@ export default class Batter extends Sprite{
 		super(game);
 		
 		this.game = game;
-
 		/* Bind Event Handlers */
 		window.addEventListener('keydown', this.keyDownAction.bind(this.game));
 		window.addEventListener('keyup',   this.keyUpAction.bind(this.game));
@@ -22,8 +21,8 @@ export default class Batter extends Sprite{
 		this.batterBoxLimitRight = 550;
 		this.batterBoxLimitLeft = 470;
 
-		this.batterLocationX = 480;
-		this.batterLocationY = 315;
+		this.positionX = 480;
+		this.positionY = 315;
 
 		/* bind */
 		this.keyDownAction.bind(this);
@@ -58,8 +57,8 @@ export default class Batter extends Sprite{
    			0, //
    			186, // 1314 / 7
    			154, //
-   			this.batterLocationX, // 
-   			this.batterLocationY, //
+   			this.positionX, // 
+   			this.positionY, //
    			186,//
    			154 ); //
 
@@ -99,19 +98,18 @@ export default class Batter extends Sprite{
     }
     checkHit(){
 		if(this.frameIndex == 5){
-			if(this.game.ball.ballY > 290  && this.game.ball.ballY < 340){
-				//console.log("hit" + this.throwIsHit);
+			if(this.game.ball.positionY > 290  && this.game.ball.positionY < 340){
 				if(!this.throwIsHit){
 					this.throwIsHit = true;
 					this.game.ball.balling=false;
 					this.game.ball.frameIndex=-1;
 					this.game.roundScore +=1;
 					this.game.audio[2].play();
-					this.startHitAnimation(this.game.ball.ballX,this.game.ball.ballY);
+					this.startHitAnimation(this.game.ball.positionX,this.game.ball.positionY);
 				}
 			}
-			else if((this.game.ball.ballY > 200  && this.game.ball.ballY < 269) || 
-				(this.game.ball.ballY > 321  && this.game.ball.ballY < 350)){
+			else if((this.game.ball.positionY > 200  && this.game.ball.positionY < 269) || 
+				(this.game.ball.positionY > 321  && this.game.ball.positionY < 350)){
 				if(!this.throwIsHit){
 					this.throwIsHit = true;
 					this.foultimer = this.maxShowFoulTimer;
@@ -144,20 +142,20 @@ export default class Batter extends Sprite{
 			
 		}
 		if(e.code == "ArrowLeft" || e.code == "KeyA"){
-			if(this.batter.batterLocationX > this.batter.batterBoxLimitLeft){
-				this.batter.batterLocationX--;
+			if(this.batter.positionX > this.batter.batterBoxLimitLeft){
+				this.batter.positionX--;
 			}
 		}
 		if(e.code == "ArrowRight" || e.code == "KeyD"){
-			if(this.batter.batterLocationX < this.batter.batterBoxLimitRight){
-				this.batter.batterLocationX++;
+			if(this.batter.positionX < this.batter.batterBoxLimitRight){
+				this.batter.positionX++;
 			}
 		}
  	}
 	keyUpAction(e){
 		//console.log(e.code);
 		if(e.code == "Space" || e.code == "KeyW"){
-			//console.log(this.batter.game.ball.ballY);
+			//console.log(this.batter.game.ball.positionY);
 			this.batter.startSwing();
 			/* set swingTime to roundTimer
 				swingTime = swingTime - game.pitcher.pitchStart 
@@ -169,7 +167,7 @@ export default class Batter extends Sprite{
 	startHitAnimation(x,y){
 		this.game.ball.balling = false;
 		this.game.ball.hitAnimation = true;
-		this.game.ball.ballX = x;
-		this.game.ball.ballY = y;
+		this.game.ball.positionX = x;
+		this.game.ball.positionY = y;
 	}
 }
