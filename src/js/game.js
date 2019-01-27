@@ -171,7 +171,7 @@ class Game{
 			this.ctx.fillText("Programming", 10, 450);
 			this.ctx.fillText("Gordon Wallace", 10, 470);
 			this.ctx.fillText("QA / System Design", 10, 500);
-			this.ctx.fillText("Jack", 10, 520);
+			this.ctx.fillText("Jack Kimball", 10, 520);
 
 			this.ctx.font = "18px Arial";
 			this.ctx.fillText("Copyright 2019 - Made for GameJam 2019", 660, 520);

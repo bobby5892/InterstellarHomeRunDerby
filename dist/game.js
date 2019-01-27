@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1eb4f38adf788a5c6c14"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3e14d72acb5561184127"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -241,7 +241,7 @@
 /******/ 				};
 /******/ 			});
 /******/ 			hotUpdate = {};
-/******/ 			var chunkId = 1;
+/******/ 			var chunkId = 0;
 /******/ 			{ // eslint-disable-line no-lone-blocks
 /******/ 				/*globals chunkId */
 /******/ 				hotEnsureUpdateChunk(chunkId);
@@ -722,18 +722,985 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(1)(__webpack_require__.s = 1);
+/******/ 	return hotCreateRequire(2)(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-console.log("test");
+Object.defineProperty(exports, "__esModule", {
+		value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Sprite = function Sprite(game) {
+		_classCallCheck(this, Sprite);
+
+		this.game = game;
+		/* Where on the canvas is it */
+		this.positionX = 0;
+		this.positionY = 0;
+		/* How fast is it going */
+		this.speed = 0;
+
+		/* Where is it going */
+
+		this.destinationX = 0;
+		this.destinationY = 0;
+
+		/* Do we draw this in the canvas */
+		this.visible = false;
+
+		/* Center of Screen */
+		this.centerX = this.game.canvas.width / 2;
+		this.centerY = this.game.canvas.height / 2;
+};
+
+exports.default = Sprite;
+
+/***/ }),
+/* 1 */,
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _batter = __webpack_require__(3);
+
+var _batter2 = _interopRequireDefault(_batter);
+
+var _sprite = __webpack_require__(0);
+
+var _sprite2 = _interopRequireDefault(_sprite);
+
+var _pitcher = __webpack_require__(4);
+
+var _pitcher2 = _interopRequireDefault(_pitcher);
+
+var _ball = __webpack_require__(5);
+
+var _ball2 = _interopRequireDefault(_ball);
+
+var _scoreboard = __webpack_require__(6);
+
+var _scoreboard2 = _interopRequireDefault(_scoreboard);
+
+var _platform = __webpack_require__(7);
+
+var _platform2 = _interopRequireDefault(_platform);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Game = function () {
+	function Game(game) {
+		_classCallCheck(this, Game);
+
+		console.log("game.js");
+		this.canvas = document.getElementsByTagName("canvas")[0];
+		this.ctx = this.canvas.getContext('2d');
+
+		/* Refactor into array of sprites */
+
+		this.batter = new _batter2.default(this);
+		this.pitcher = new _pitcher2.default(this);
+		this.ball = new _ball2.default(this);
+		this.platform = new _platform2.default(this);
+		this.scoreboard = new _scoreboard2.default(this);
+
+		/* Some Defaults */
+		this.backgroundColor = "#000000";
+
+		/* Timer */
+		this.timer = null;
+		this.tickTime = 100;
+
+		this.roundTime = -1;
+		// Round has begun
+		this.roundStarted = true;
+
+		// Current Number of Runs
+		this.roundScore = 0;
+		this.backgroundImage = null;
+
+		this.audio = null;
+		/* array of images */
+		this.backgroundImage = null;
+
+		this.showPlayAgain = false;
+		/* Call Methods */
+		/* stretch canvas */
+		this.initCanvas();
+
+		this.firstload = true;
+
+		// Start Game Rendering  - Last Method
+		this.animateGame();
+	}
+
+	_createClass(Game, [{
+		key: 'initCanvas',
+		value: function initCanvas() {
+			this.canvas.width = 960;
+			this.canvas.height = 540;
+			this.backgroundImages = [];
+			var drawing = new Image();
+			drawing.src = "./dist/images/background.png"; // can also be a remote URL e.g. http:// // 0
+			this.backgroundImages.push(drawing);
+
+			drawing = new Image();
+			drawing.src = "./dist/images/background-stars.png"; // 1
+			this.backgroundImages.push(drawing);
+
+			drawing = new Image();
+			drawing.src = "./dist/images/background-stars2.png"; // 2
+			this.backgroundImages.push(drawing);
+
+			drawing = new Image();
+			drawing.src = "./dist/images/keys.png"; // 3
+			this.backgroundImages.push(drawing);
+
+			drawing = new Image();
+			drawing.src = "./dist/images/playagain.png"; // 4
+			this.backgroundImages.push(drawing);
+
+			drawing = new Image();
+			drawing.src = "./dist/images/title.png"; // 5
+			this.backgroundImages.push(drawing);
+
+			drawing = new Image();
+			drawing.src = "./dist/images/play.png"; // 6
+			this.backgroundImages.push(drawing);
+
+			this.audio = [];
+			this.audio.push(new Audio('./dist/audio/47356__fotoshop__oof.wav')); //0
+			this.audio.push(new Audio('./dist/audio/fart01.wav')); // 1 / 
+			this.audio.push(new Audio('./dist/audio/hitbat_v1.wav')); // 2 / 
+			this.audio.push(new Audio('./dist/audio/stadiumcheer1.wav')); // 3 / 
+			this.audio.push(new Audio('./dist/audio/whooshbat1.wav')); //4 
+
+		}
+	}, {
+		key: 'animateGame',
+		value: function animateGame() {
+			var _this = this;
+
+			this.timer = setInterval(function () {
+
+				// Clear the Canvas
+				_this.clearCanvas();
+				// Draw the platform
+				_this.platform.draw(_this.ctx);
+				// Draw the pitcher
+				_this.pitcher.draw(_this.ctx);
+				// Draw the scoreboard
+				_this.scoreboard.draw(_this.ctx);
+				// Draw the Ball
+				_this.ball.draw(_this.ctx);
+				// Draw the Batter
+				_this.batter.draw(_this.ctx);
+
+				// draw play again
+				if (_this.showPlayAgain) {
+					_this.drawPlayAgain();
+				}
+
+				/* show menu */
+				if (_this.firstload == true) {
+					_this.drawMenu();
+				}
+
+				// Round Timer Update
+				_this.roundTimerTick();
+			}), this.tickTime;
+		}
+	}, {
+		key: 'startGame',
+		value: function startGame() {
+			this.startroundTimer();
+			this.roundStarted = true;
+			this.roundScore = 0;
+			this.showPlayAgain = false;
+		}
+	}, {
+		key: 'startroundTimer',
+		value: function startroundTimer() {
+			this.roundTime = 15000;
+			//this.roundTime = 1000;
+		}
+	}, {
+		key: 'roundTimerTick',
+		value: function roundTimerTick() {
+			if (this.roundStarted) {
+				if (this.roundTime > 0) {
+					this.roundTime--; // so this is 100ms
+				}
+			}
+			/* Lets show the play again */
+			if (this.roundTime == 0) {
+				this.showPlayAgain = true;
+			}
+		}
+	}, {
+		key: 'drawPlayAgain',
+		value: function drawPlayAgain() {
+			this.ctx.drawImage(this.backgroundImages[4], 375, 110);
+			this.ctx.fillText("[space]", 450, 250);
+		}
+	}, {
+		key: 'drawMenu',
+		value: function drawMenu() {
+			this.ctx.beginPath();
+			this.ctx.rect(0, 0, 960, 540);
+			this.ctx.fillStyle = "black";
+			this.ctx.fill();
+			this.ctx.drawImage(this.backgroundImages[5], 375, 110);
+			this.ctx.strokecolor = "red";
+			this.ctx.fillStyle = "red";
+			this.ctx.font = "bold 24px Georgia";
+			this.ctx.color = "red";
+			this.ctx.fillText("Press Space or Touch to Start", 375, 400);
+
+			this.ctx.font = "24px Georgia";
+			this.ctx.color = "white";
+			this.ctx.fillStyle = "white";
+			this.ctx.strokecolor = "white";
+			this.ctx.fillText("Lead Art", 10, 350);
+			this.ctx.fillText("Eric Hill", 10, 370);
+			this.ctx.fillText("Lead Programming", 10, 400);
+			this.ctx.fillText("Robert Moore", 10, 420);
+
+			this.ctx.fillText("Programming", 10, 450);
+			this.ctx.fillText("Gordon Wallace", 10, 470);
+			this.ctx.fillText("QA / System Design", 10, 500);
+			this.ctx.fillText("Jack Kimball", 10, 520);
+
+			this.ctx.font = "18px Arial";
+			this.ctx.fillText("Copyright 2019 - Made for GameJam 2019", 660, 520);
+
+			this.ctx.drawImage(this.backgroundImages[6], 470, 430);
+		}
+	}, {
+		key: 'clearCanvas',
+		value: function clearCanvas() {
+			/*  main background */
+			this.ctx.drawImage(this.backgroundImages[0], 0, 0); // draw first batter image
+
+			/*  stars alt */
+			if (this.roundTime % 2 == 0) {
+				this.ctx.drawImage(this.backgroundImages[1], 0, 0);
+			}
+			/*  stars alt1 */
+			else {
+					this.ctx.drawImage(this.backgroundImages[2], 0, 0);
+				}
+
+			/*  keys */
+			this.ctx.drawImage(this.backgroundImages[3], 50, 360);
+		}
+	}]);
+
+	return Game;
+}();
+
+var game = void 0;
+window.addEventListener('load', function () {
+	game = new Game();
+});
+window.addEventListener('resize', function () {
+	console.log("Window Changed");
+});
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _sprite = __webpack_require__(0);
+
+var _sprite2 = _interopRequireDefault(_sprite);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Batter = function (_Sprite) {
+	_inherits(Batter, _Sprite);
+
+	function Batter(game) {
+		_classCallCheck(this, Batter);
+
+		var _this = _possibleConstructorReturn(this, (Batter.__proto__ || Object.getPrototypeOf(Batter)).call(this, game));
+
+		_this.game = game;
+
+		/* Bind Event Handlers */
+		window.addEventListener('keydown', _this.keyDownAction.bind(_this.game));
+		window.addEventListener('keyup', _this.keyUpAction.bind(_this.game));
+		// More needs done then this - need 
+		window.addEventListener('touchstart', _this.keyDownAction.bind(_this.game));
+		window.addEventListener('click', _this.keyDownAction.bind(_this.game));
+
+		/* Will hold an array of prerendered batting images */
+		_this.batterImages = null;
+		_this.loadImages();
+
+		/* Time at which bat is swung from roundTimer */
+		_this.swingTime = null;
+		_this.batterBoxLimitRight = 550;
+		_this.batterBoxLimitLeft = 470;
+
+		_this.batterLocationX = 480;
+		_this.batterLocationY = 315;
+
+		/* bind */
+		_this.keyDownAction.bind(_this);
+		_this.keyUpAction.bind(_this);
+
+		_this.throwIsHit = false;
+		//http://www.williammalone.com/articles/create-html5-canvas-javascript-sprite-animation/
+
+		_this.maxShowFoulTimer = 300;
+		_this.foultimer = 0;
+
+		_this.frameIndex = 0;
+		_this.tickCount = 0;
+		_this.ticksPerFrame = 20;
+		_this.swinging = false;
+		return _this;
+	}
+
+	_createClass(Batter, [{
+		key: 'loadImages',
+		value: function loadImages() {
+			this.batterImages = [];
+
+			var drawing = new Image();
+			drawing.src = "./dist/images/batter.png"; // can also be a remote URL e.g. http://
+			this.batterImages.push(drawing);
+
+			drawing = new Image();
+			drawing.src = "./dist/images/foul.png";
+			this.batterImages.push(drawing);
+		}
+	}, {
+		key: 'draw',
+		value: function draw(ctx) {
+			ctx.drawImage(this.batterImages[0], this.frameIndex * this.batterImages[0].width / 7, //
+			0, //
+			186, // 1314 / 7
+			154, //
+			this.batterLocationX, // 
+			this.batterLocationY, //
+			186, //
+			154); //
+
+			if (this.swinging) {
+				this.updateSwing();
+			}
+			this.checkHit();
+
+			if (this.foultimer > 0) {
+				this.yellFoul();
+				this.foultimer -= 1;
+			}
+		}
+	}, {
+		key: 'updateSwing',
+		value: function updateSwing() {
+			this.tickCount += 1;
+			if (this.tickCount > this.ticksPerFrame) {
+				this.tickCount = 1;
+				// Go to the next frame
+				this.frameIndex += 1;
+			}
+			// Stop swinging at end of animation
+			if (this.frameIndex == 7) {
+				this.frameIndex = 0;
+				this.swinging = false;
+			}
+		}
+	}, {
+		key: 'startSwing',
+		value: function startSwing() {
+			this.swinging = true;
+			this.frameIndex = 0;
+			this.tickCount = 0;
+		}
+	}, {
+		key: 'yellFoul',
+		value: function yellFoul() {
+
+			this.game.ctx.drawImage(this.batterImages[1], 440, 250);
+		}
+	}, {
+		key: 'checkHit',
+		value: function checkHit() {
+			if (this.frameIndex == 5) {
+				if (this.game.ball.ballY > 290 && this.game.ball.ballY < 340) {
+					//console.log("hit" + this.throwIsHit);
+					if (!this.throwIsHit) {
+						this.throwIsHit = true;
+						this.game.ball.balling = false;
+						this.game.ball.frameIndex = -1;
+						this.game.roundScore += 1;
+						this.game.audio[2].play();
+						this.startHitAnimation(this.game.ball.ballX, this.game.ball.ballY);
+					}
+				} else if (this.game.ball.ballY > 200 && this.game.ball.ballY < 269 || this.game.ball.ballY > 321 && this.game.ball.ballY < 350) {
+					if (!this.throwIsHit) {
+						this.throwIsHit = true;
+						this.foultimer = this.maxShowFoulTimer;
+						this.game.audio[1].play();
+						this.yellFoul();
+					}
+				}
+			}
+		}
+	}, {
+		key: 'keyDownAction',
+		value: function keyDownAction(e, batter) {
+			/* For touch devices */
+			if (e.code == null) {
+				if (this.batter.game.roundTime <= 0) {
+					if (this.batter.game.firstload) {
+						this.batter.game.firstload = false;
+					}
+					this.batter.game.startGame();
+				}
+				this.batter.startSwing();
+			}
+			/* For Keyboard / Mouse */
+			if (e.code == "Space" || e.code == "KeyW") {
+				//console.log("space" + this.batter.game.roundTime);
+				if (this.batter.game.roundTime <= 0) {
+					if (this.batter.game.firstload) {
+						this.batter.game.firstload = false;
+					}
+					this.batter.game.startGame();
+				}
+			}
+			if (e.code == "ArrowLeft" || e.code == "KeyA") {
+				if (this.batter.batterLocationX > this.batter.batterBoxLimitLeft) {
+					this.batter.batterLocationX--;
+				}
+			}
+			if (e.code == "ArrowRight" || e.code == "KeyD") {
+				if (this.batter.batterLocationX < this.batter.batterBoxLimitRight) {
+					this.batter.batterLocationX++;
+				}
+			}
+		}
+	}, {
+		key: 'keyUpAction',
+		value: function keyUpAction(e) {
+			//console.log(e.code);
+			if (e.code == "Space" || e.code == "KeyW") {
+				//console.log(this.batter.game.ball.ballY);
+				this.batter.startSwing();
+				/* set swingTime to roundTimer
+    	swingTime = swingTime - game.pitcher.pitchStart 
+    	call ballHit*/
+			}
+
+			//console.log("keyup" + ` ${e.code}`);
+		}
+	}, {
+		key: 'startHitAnimation',
+		value: function startHitAnimation(x, y) {
+			this.game.ball.balling = false;
+			this.game.ball.hitAnimation = true;
+			this.game.ball.ballX = x;
+			this.game.ball.ballY = y;
+		}
+	}]);
+
+	return Batter;
+}(_sprite2.default);
+
+exports.default = Batter;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+			value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _sprite = __webpack_require__(0);
+
+var _sprite2 = _interopRequireDefault(_sprite);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Pitcher = function (_Sprite) {
+			_inherits(Pitcher, _Sprite);
+
+			function Pitcher(game) {
+						_classCallCheck(this, Pitcher);
+
+						var _this = _possibleConstructorReturn(this, (Pitcher.__proto__ || Object.getPrototypeOf(Pitcher)).call(this, game));
+
+						console.log("I'm a pitcher");
+						_this.game = game;
+
+						/* For calculating ball position */
+						_this.throwSpeed = null;
+
+						_this.pitchThrown = true;
+
+						/* For calculating where the pitch is*/
+						_this.pitchStart = null;
+						_this.pitchSpeed = null;
+
+						//  Storage of actual loaded images
+						_this.pitcherImages = null;
+						// For Animation
+						_this.pitchTime = null;
+
+						_this.frameIndex = 0;
+						_this.tickCount = 0;
+						_this.ticksPerFrame = 20;
+
+						_this.pitching = false;
+
+						/* pitcher location */
+						_this.pitcherX = 480;
+						_this.pitcherY = 20;
+
+						/* how often to pitch*/
+						_this.pitchInterval = 800;
+						_this.loadImages();
+
+						return _this;
+			}
+
+			_createClass(Pitcher, [{
+						key: "updatePitch",
+						value: function updatePitch() {
+									// 0,6,7,8,9,10
+									this.tickCount += 1;
+									if (this.tickCount > this.ticksPerFrame) {
+												this.tickCount = 1;
+												// Go to the next frame
+												this.frameIndex += 1;
+									}
+									// Stop swinging at end of animation
+									if (this.frameIndex == 11) {
+												this.frameIndex = 0;
+												this.pitching = false;
+									} else if (this.frameIndex == 6) {
+												this.game.ball.startBalling();
+									}
+						}
+						// Animation
+
+			}, {
+						key: "startPitch",
+						value: function startPitch() {
+									this.tickCount = 5;
+									this.pitching = true;
+									this.game.batter.throwIsHit = false;
+						}
+			}, {
+						key: "throwPitch",
+						value: function throwPitch() {
+									this.pitchSpeed = 10;
+									this.startPitch();
+						}
+			}, {
+						key: "loadImages",
+						value: function loadImages() {
+									this.pitcherImages = [];
+									var drawing = new Image();
+									drawing.src = "./dist/images/pitcher.png"; // can also be a remote URL e.g. http://
+
+									this.pitcherImages.push(drawing);
+						}
+			}, {
+						key: "draw",
+						value: function draw(ctx) {
+									//	ctx.drawImage(this.platformImages[0],500,40); // draw first batter image
+									ctx.drawImage(this.pitcherImages[0], this.frameIndex * this.pitcherImages[0].width / 11, //
+									0, //
+									90, // 1314 / 7
+									120, //
+									this.pitcherX, // 
+									this.pitcherY, //
+									90, //
+									120); //
+
+									if (this.pitching) {
+												this.updatePitch();
+									}
+
+									// Trigger Pitches if game is playing
+									if (this.game.roundStarted && this.game.roundTime % this.pitchInterval == 0) {
+												this.throwPitch();
+									}
+						}
+			}]);
+
+			return Pitcher;
+}(_sprite2.default);
+
+exports.default = Pitcher;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _sprite = __webpack_require__(0);
+
+var _sprite2 = _interopRequireDefault(_sprite);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Ball = function (_Sprite) {
+  _inherits(Ball, _Sprite);
+
+  function Ball(game) {
+    _classCallCheck(this, Ball);
+
+    var _this = _possibleConstructorReturn(this, (Ball.__proto__ || Object.getPrototypeOf(Ball)).call(this, game));
+
+    console.log("I'm a ball");
+
+    _this.ballImages = null;
+    _this.ballX = -100;
+    _this.ballY = -100;
+    _this.loadImages();
+
+    _this.Ydelta = 1;
+
+    _this.balling = false;
+    _this.frameIndex = 0;
+    _this.tickCount = 0;
+    _this.ticksPerFrame = 85;
+
+    /* Hit Animation for Ball leaving bottom of screen going towards top */
+    _this.hitAnimation = false;
+    _this.showHomeRun = false;
+    _this.showHomeRunTimeRemaining = 0;
+
+    return _this;
+  }
+
+  _createClass(Ball, [{
+    key: "loadImages",
+    value: function loadImages() {
+      this.ballImages = [];
+      var drawing = new Image();
+      drawing.src = "./dist/images/ball.png"; // can also be a remote URL e.g. http://
+      this.ballImages.push(drawing);
+
+      drawing = new Image();
+      drawing.src = "./dist/images/homerun.png";
+      this.ballImages.push(drawing);
+    }
+  }, {
+    key: "updateBall",
+    value: function updateBall() {
+      // 0,6,7,8,9,10
+      this.tickCount += 1;
+      if (this.tickCount > this.ticksPerFrame) {
+        this.tickCount = 1;
+        // Go to the next frame
+        this.frameIndex -= 1;
+      }
+      // Stop swinging at end of animation
+
+      if (this.frameIndex == 0) {
+        this.frameIndex = 7;
+        this.balling = false;
+      }
+      this.ballY += this.Ydelta;
+    }
+  }, {
+    key: "updateHitAnimation",
+    value: function updateHitAnimation() {
+      this.tickCount += 1;
+      if (this.tickCount > this.ticksPerFrame) {
+        this.tickCount = 1;
+        // Go to the next frame
+        this.frameIndex = 0;
+      }
+      // Stop swinging at end of animation
+      if (this.frameIndex == 0) {
+        this.frameIndex = 1;
+      } else {
+        this.frameIndex = 0;
+      }
+      /* stop */
+      if (this.ballY < -90) {
+        this.frameIndex = 7;
+        this.hitAnimation = false;
+        // This only runs once so lets show the homerun
+        this.startHomeRun();
+      }
+      this.ballY -= this.Ydelta * 2;
+    }
+  }, {
+    key: "startHomeRun",
+    value: function startHomeRun() {
+      this.showHomeRun = true;
+      this.showHomeRunTimeRemaining = 250;
+      this.game.audio[3].play();
+    }
+  }, {
+    key: "updateShowHomeRun",
+    value: function updateShowHomeRun() {
+      if (this.showHomeRunTimeRemaining > 0) {
+        this.game.ctx.drawImage(this.ballImages[1], 270, 330);
+        this.showHomeRunTimeRemaining--;
+      }
+    }
+  }, {
+    key: "startBalling",
+    value: function startBalling() {
+      this.balling = true;
+      this.frameIndex = 6;
+      /* Starting Location */
+      this.ballX = 490;
+      this.ballY = -20;
+
+      this.destinationX = 480;
+      this.destinationY = 540;
+    }
+  }, {
+    key: "draw",
+    value: function draw(ctx) {
+      //ctx.drawImage(this.ballImages[0],this.ballX,this.ballY); // draw first batter image
+      ctx.drawImage(this.ballImages[0], this.frameIndex * this.ballImages[0].width / 6, //
+      0, //
+      50, // 1314 / 7
+      90, //
+      this.ballX, // 
+      this.ballY, //
+      50, //
+      90); //
+
+      if (this.balling) {
+        this.updateBall();
+      }
+      if (this.hitAnimation) {
+        this.updateHitAnimation();
+      }
+      if (this.showHomeRun) {
+        this.updateShowHomeRun();
+      }
+      // Trigger Pitches if game is playing
+      if (this.game.roundStarted && this.game.roundTime % this.game.pitcher.pitchInterval == 0) {}
+      //this.startBalling();
+
+
+      // Stop the ball
+      if (this.BallY > window.innerHeight) {
+        this.balling = false;
+      }
+    }
+  }]);
+
+  return Ball;
+}(_sprite2.default);
+
+exports.default = Ball;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _sprite = __webpack_require__(0);
+
+var _sprite2 = _interopRequireDefault(_sprite);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Scoreboard = function (_Sprite) {
+	_inherits(Scoreboard, _Sprite);
+
+	function Scoreboard(game) {
+		_classCallCheck(this, Scoreboard);
+
+		var _this = _possibleConstructorReturn(this, (Scoreboard.__proto__ || Object.getPrototypeOf(Scoreboard)).call(this, game));
+
+		_this.game = game;
+
+		_this.positionX = 6;
+		_this.positionY = 10;
+		_this.scoreboardImages = null;
+
+		_this.font = "30px Arial";
+		_this.fontColor = "red";
+		_this.loadImages();
+		return _this;
+	}
+
+	_createClass(Scoreboard, [{
+		key: "loadImages",
+		value: function loadImages() {
+			this.scoreboardImages = [];
+			var drawing = new Image();
+			drawing.src = "./dist/images/scoreboard.png"; // can also be a remote URL e.g. http://
+
+			this.scoreboardImages.push(drawing);
+		}
+	}, {
+		key: "drawTime",
+		value: function drawTime(ctx, timeText) {
+			ctx.font = this.font;
+			ctx.fillStyle = this.fontColor;
+			ctx.fillText(timeText, 40, 65);
+		}
+	}, {
+		key: "drawScore",
+		value: function drawScore(ctx, scoreText) {
+			ctx.font = this.font;
+			ctx.fillStyle = this.fontColor;
+			ctx.fillText(scoreText, 190, 85);
+		}
+	}, {
+		key: "draw",
+		value: function draw(ctx) {
+			ctx.drawImage(this.scoreboardImages[0], this.positionX, this.positionY); // draw first batter image
+			this.drawTime(ctx, this.getTime() / 100);
+			this.drawScore(ctx, this.game.roundScore);
+		}
+	}, {
+		key: "getTime",
+		value: function getTime() {
+			return Math.ceil(this.game.roundTime / 2.5);
+		}
+	}]);
+
+	return Scoreboard;
+}(_sprite2.default);
+
+exports.default = Scoreboard;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _sprite = __webpack_require__(0);
+
+var _sprite2 = _interopRequireDefault(_sprite);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Platform = function (_Sprite) {
+	_inherits(Platform, _Sprite);
+
+	function Platform(game) {
+		_classCallCheck(this, Platform);
+
+		var _this = _possibleConstructorReturn(this, (Platform.__proto__ || Object.getPrototypeOf(Platform)).call(this, game));
+
+		_this.game = game;
+		_this.platformImages = null;
+
+		_this.loadImages();
+		return _this;
+	}
+
+	_createClass(Platform, [{
+		key: "loadImages",
+		value: function loadImages() {
+			this.platformImages = [];
+			var drawing = new Image();
+			drawing.src = "./dist/images/platform.png"; // can also be a remote URL e.g. http://
+
+			this.platformImages.push(drawing);
+		}
+	}, {
+		key: "draw",
+		value: function draw(ctx) {
+			ctx.drawImage(this.platformImages[0], 270, 430); // draw first batter image
+		}
+	}]);
+
+	return Platform;
+}(_sprite2.default);
+
+exports.default = Platform;
 
 /***/ })
 /******/ ]);
