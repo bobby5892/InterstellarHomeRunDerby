@@ -1,3 +1,37 @@
+/*
+	Interstellar Home Run Derby
+	License: Attribution-NonCommercial-ShareAlike 3.0 United States (CC BY-NC-SA 3.0 US)
+
+	Developed By
+
+	Lead Art 
+	----------
+	Eric Hill  
+		twitter.com/erichill1232
+		instagram.com/eric.hill.1232
+		https://www.deviantart.com/beza
+		https://nightmarenetherworld.tumblr.com/
+
+	Lead Programming
+	----------
+	Robert Moore
+		http://www.eugeneprogramming.com
+		https://www.linkedin.com/in/robertbenmoore/
+
+	Programming
+	----------
+	Gordon Wallace
+
+	Q & A / System Design
+	----------
+	Jack Kimball
+
+	Github Copy @ 
+	https://github.com/bobby5892/InterstellarHomeRunDerby
+
+
+
+*/
 import Batter from './batter.js';
 import Sprite from './sprite.js';
 import Pitcher from './pitcher.js';
@@ -144,7 +178,6 @@ class Game{
 	}
 	drawPlayAgain(){
 		this.ctx.drawImage(this.backgroundImages[4],375,110);
-		this.ctx.fillText("[space]", 450 , 250);
 	}
 	drawMenu(){
 			this.ctx.beginPath();

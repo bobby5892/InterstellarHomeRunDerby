@@ -1,3 +1,37 @@
+/*
+	Interstellar Home Run Derby
+	License: Attribution-NonCommercial-ShareAlike 3.0 United States (CC BY-NC-SA 3.0 US)
+
+	Developed By
+
+	Lead Art 
+	----------
+	Eric Hill  
+		twitter.com/erichill1232
+		instagram.com/eric.hill.1232
+		https://www.deviantart.com/beza
+		https://nightmarenetherworld.tumblr.com/
+
+	Lead Programming
+	----------
+	Robert Moore
+		http://www.eugeneprogramming.com
+		https://www.linkedin.com/in/robertbenmoore/
+
+	Programming
+	----------
+	Gordon Wallace
+
+	Q & A / System Design
+	----------
+	Jack Kimball
+
+	Github Copy @ 
+	https://github.com/bobby5892/InterstellarHomeRunDerby
+
+
+
+*/
 import Sprite from './sprite.js';
 export default class Batter extends Sprite{
 
@@ -34,6 +68,9 @@ export default class Batter extends Sprite{
 		this.tickCount = 0;
 		this.ticksPerFrame = 20;
 		this.swinging = false;
+
+		/* Used to detect first foul hit in hitbox*/
+		this.foulcount = 0;
 	}
 	loadImages(){
 		this.batterImages = [];
@@ -83,6 +120,7 @@ export default class Batter extends Sprite{
     startSwing(){
     	/* prevent animation from restarting from mashing keys */
     	if(this.frameIndex == 0){
+    		this.foulcount = 0;
 	    	this.swinging = true;
 	    	this.frameIndex = 0;
 	    	this.tickCount = 0;
@@ -93,6 +131,7 @@ export default class Batter extends Sprite{
     }
     checkHit(){
 		if(this.frameIndex == 5){
+			this.foulcount++;
 			// Home Run - strong hit
 			if(this.game.ball.positionY > 300  && this.game.ball.positionY < 315){
 				if(!this.throwIsHit){
@@ -107,7 +146,7 @@ export default class Batter extends Sprite{
 				}
 			}
 			// Home Run barely
-			if(this.game.ball.positionY > 280  && this.game.ball.positionY < 335){
+			if(this.game.ball.positionY > 298  && this.game.ball.positionY < 335){
 				if(!this.throwIsHit){
 					this.throwIsHit = true;
 					this.game.ball.balling=false;
@@ -118,9 +157,11 @@ export default class Batter extends Sprite{
 					this.startHitAnimation(this.game.ball.positionX,this.game.ball.positionY);
 				}
 			}
-			else if((this.game.ball.positionY > 260  && this.game.ball.positionY < 262) || 
+			/* foul ball */
+			else if(
+				((this.game.ball.positionY > 260  && this.game.ball.positionY < 279) && (this.foulcount == 1))|| 
 				(this.game.ball.positionY > 336  && this.game.ball.positionY < 350)){
-				if(!this.throwIsHit){
+				if(!this.throwIsHit){ 
 					this.throwIsHit = true;
 					this.foultimer = this.maxShowFoulTimer;
 					this.game.audio[1].play();
@@ -148,6 +189,7 @@ export default class Batter extends Sprite{
 				}
 				this.batter.game.startGame();
 			}
+			this.batter.startSwing();
 		}
 		if(e.code == "ArrowLeft" || e.code == "KeyA"){
 			if(this.batter.positionX > this.batter.batterBoxLimitLeft){
@@ -161,9 +203,7 @@ export default class Batter extends Sprite{
 		}
  	}
 	keyUpAction(e){
-		if(e.code == "Space" || e.code == "KeyW"){
-			this.batter.startSwing();
-		}
+		
 	}
 	startHitAnimation(x,y){
 		this.game.ball.balling = false;

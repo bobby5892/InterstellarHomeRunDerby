@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "815ca55b7ec743bf3121"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fb709740a9eed5dee8de"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -733,32 +733,66 @@
 
 
 Object.defineProperty(exports, "__esModule", {
-		value: true
+	value: true
 });
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/*
+	Interstellar Home Run Derby
+	License: Attribution-NonCommercial-ShareAlike 3.0 United States (CC BY-NC-SA 3.0 US)
+
+	Developed By
+
+	Lead Art 
+	----------
+	Eric Hill  
+		twitter.com/erichill1232
+		instagram.com/eric.hill.1232
+		https://www.deviantart.com/beza
+		https://nightmarenetherworld.tumblr.com/
+
+	Lead Programming
+	----------
+	Robert Moore
+		http://www.eugeneprogramming.com
+		https://www.linkedin.com/in/robertbenmoore/
+
+	Programming
+	----------
+	Gordon Wallace
+
+	Q & A / System Design
+	----------
+	Jack Kimball
+
+	Github Copy @ 
+	https://github.com/bobby5892/InterstellarHomeRunDerby
+
+
+
+*/
 var Sprite = function Sprite(game) {
-		_classCallCheck(this, Sprite);
+	_classCallCheck(this, Sprite);
 
-		this.game = game;
-		/* Where on the canvas is it */
-		this.positionX = 0;
-		this.positionY = 0;
-		/* How fast is it going */
-		this.speed = 0;
+	this.game = game;
+	/* Where on the canvas is it */
+	this.positionX = 0;
+	this.positionY = 0;
+	/* How fast is it going */
+	this.speed = 0;
 
-		/* Where is it going */
+	/* Where is it going */
 
-		this.destinationX = 0;
-		this.destinationY = 0;
+	this.destinationX = 0;
+	this.destinationY = 0;
 
-		/* Do we draw this in the canvas */
-		this.visible = false;
+	/* Do we draw this in the canvas */
+	this.visible = false;
 
-		/* Center of Screen */
-		this.centerX = this.game.canvas.width / 2;
-		this.centerY = this.game.canvas.height / 2;
+	/* Center of Screen */
+	this.centerX = this.game.canvas.width / 2;
+	this.centerY = this.game.canvas.height / 2;
 };
 
 exports.default = Sprite;
@@ -771,7 +805,41 @@ exports.default = Sprite;
 "use strict";
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	Interstellar Home Run Derby
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	License: Attribution-NonCommercial-ShareAlike 3.0 United States (CC BY-NC-SA 3.0 US)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	Developed By
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	Lead Art 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	Eric Hill  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     		twitter.com/erichill1232
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     		instagram.com/eric.hill.1232
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     		https://www.deviantart.com/beza
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     		https://nightmarenetherworld.tumblr.com/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	Lead Programming
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	Robert Moore
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     		http://www.eugeneprogramming.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     		https://www.linkedin.com/in/robertbenmoore/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	Programming
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	Gordon Wallace
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	Q & A / System Design
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	Jack Kimball
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	Github Copy @ 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     	https://github.com/bobby5892/InterstellarHomeRunDerby
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */
+
 
 var _batter = __webpack_require__(3);
 
@@ -953,7 +1021,6 @@ var Game = function () {
 		key: 'drawPlayAgain',
 		value: function drawPlayAgain() {
 			this.ctx.drawImage(this.backgroundImages[4], 375, 110);
-			this.ctx.fillText("[space]", 450, 250);
 		}
 	}, {
 		key: 'drawMenu',
@@ -1042,7 +1109,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Interstellar Home Run Derby
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	License: Attribution-NonCommercial-ShareAlike 3.0 United States (CC BY-NC-SA 3.0 US)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Developed By
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Lead Art 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Eric Hill  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		twitter.com/erichill1232
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		instagram.com/eric.hill.1232
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		https://www.deviantart.com/beza
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		https://nightmarenetherworld.tumblr.com/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Lead Programming
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Robert Moore
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		http://www.eugeneprogramming.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		https://www.linkedin.com/in/robertbenmoore/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Programming
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Gordon Wallace
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Q & A / System Design
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Jack Kimball
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Github Copy @ 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	https://github.com/bobby5892/InterstellarHomeRunDerby
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
 
 var Batter = function (_Sprite) {
 	_inherits(Batter, _Sprite);
@@ -1082,6 +1183,9 @@ var Batter = function (_Sprite) {
 		_this.tickCount = 0;
 		_this.ticksPerFrame = 20;
 		_this.swinging = false;
+
+		/* Used to detect first foul hit in hitbox*/
+		_this.foulcount = 0;
 		return _this;
 	}
 
@@ -1140,6 +1244,7 @@ var Batter = function (_Sprite) {
 		value: function startSwing() {
 			/* prevent animation from restarting from mashing keys */
 			if (this.frameIndex == 0) {
+				this.foulcount = 0;
 				this.swinging = true;
 				this.frameIndex = 0;
 				this.tickCount = 0;
@@ -1154,6 +1259,7 @@ var Batter = function (_Sprite) {
 		key: 'checkHit',
 		value: function checkHit() {
 			if (this.frameIndex == 5) {
+				this.foulcount++;
 				// Home Run - strong hit
 				if (this.game.ball.positionY > 300 && this.game.ball.positionY < 315) {
 					if (!this.throwIsHit) {
@@ -1168,7 +1274,7 @@ var Batter = function (_Sprite) {
 					}
 				}
 				// Home Run barely
-				if (this.game.ball.positionY > 280 && this.game.ball.positionY < 335) {
+				if (this.game.ball.positionY > 298 && this.game.ball.positionY < 335) {
 					if (!this.throwIsHit) {
 						this.throwIsHit = true;
 						this.game.ball.balling = false;
@@ -1178,14 +1284,16 @@ var Batter = function (_Sprite) {
 						this.game.audio[2].play();
 						this.startHitAnimation(this.game.ball.positionX, this.game.ball.positionY);
 					}
-				} else if (this.game.ball.positionY > 260 && this.game.ball.positionY < 262 || this.game.ball.positionY > 336 && this.game.ball.positionY < 350) {
-					if (!this.throwIsHit) {
-						this.throwIsHit = true;
-						this.foultimer = this.maxShowFoulTimer;
-						this.game.audio[1].play();
-						this.yellFoul();
-					}
 				}
+				/* foul ball */
+				else if (this.game.ball.positionY > 260 && this.game.ball.positionY < 279 && this.foulcount == 1 || this.game.ball.positionY > 336 && this.game.ball.positionY < 350) {
+						if (!this.throwIsHit) {
+							this.throwIsHit = true;
+							this.foultimer = this.maxShowFoulTimer;
+							this.game.audio[1].play();
+							this.yellFoul();
+						}
+					}
 			}
 		}
 	}, {
@@ -1209,6 +1317,7 @@ var Batter = function (_Sprite) {
 					}
 					this.batter.game.startGame();
 				}
+				this.batter.startSwing();
 			}
 			if (e.code == "ArrowLeft" || e.code == "KeyA") {
 				if (this.batter.positionX > this.batter.batterBoxLimitLeft) {
@@ -1223,11 +1332,7 @@ var Batter = function (_Sprite) {
 		}
 	}, {
 		key: 'keyUpAction',
-		value: function keyUpAction(e) {
-			if (e.code == "Space" || e.code == "KeyW") {
-				this.batter.startSwing();
-			}
-		}
+		value: function keyUpAction(e) {}
 	}, {
 		key: 'startHitAnimation',
 		value: function startHitAnimation(x, y) {
@@ -1251,7 +1356,7 @@ exports.default = Batter;
 
 
 Object.defineProperty(exports, "__esModule", {
-			value: true
+	value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1266,115 +1371,148 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Interstellar Home Run Derby
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	License: Attribution-NonCommercial-ShareAlike 3.0 United States (CC BY-NC-SA 3.0 US)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Developed By
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Lead Art 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Eric Hill  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		twitter.com/erichill1232
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		instagram.com/eric.hill.1232
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		https://www.deviantart.com/beza
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		https://nightmarenetherworld.tumblr.com/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Lead Programming
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Robert Moore
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		http://www.eugeneprogramming.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		https://www.linkedin.com/in/robertbenmoore/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Programming
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Gordon Wallace
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Q & A / System Design
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Jack Kimball
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Github Copy @ 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	https://github.com/bobby5892/InterstellarHomeRunDerby
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
 
 var Pitcher = function (_Sprite) {
-			_inherits(Pitcher, _Sprite);
+	_inherits(Pitcher, _Sprite);
 
-			function Pitcher(game) {
-						_classCallCheck(this, Pitcher);
+	function Pitcher(game) {
+		_classCallCheck(this, Pitcher);
 
-						var _this = _possibleConstructorReturn(this, (Pitcher.__proto__ || Object.getPrototypeOf(Pitcher)).call(this, game));
+		var _this = _possibleConstructorReturn(this, (Pitcher.__proto__ || Object.getPrototypeOf(Pitcher)).call(this, game));
 
-						_this.game = game;
+		_this.game = game;
+		_this.pitchThrown = true;
 
-						/* For calculating ball position */
-						_this.throwSpeed = null;
+		//  Storage of actual loaded images
+		_this.pitcherImages = null;
+		// For Animation
+		_this.pitchTime = null;
 
-						_this.pitchThrown = true;
+		_this.frameIndex = 0;
+		_this.tickCount = 0;
+		_this.ticksPerFrame = 20;
 
-						/* For calculating where the pitch is*/
-						_this.pitchStart = null;
-						_this.pitchSpeed = null;
+		_this.pitching = false;
 
-						//  Storage of actual loaded images
-						_this.pitcherImages = null;
-						// For Animation
-						_this.pitchTime = null;
+		/* pitcher location */
+		_this.positionX = 480;
+		_this.positionY = 20;
 
-						_this.frameIndex = 0;
-						_this.tickCount = 0;
-						_this.ticksPerFrame = 20;
+		/* how often to pitch*/
+		_this.pitchInterval = 800;
 
-						_this.pitching = false;
+		/* speed of pitch */
+		_this.maxSpeedIncrease = 0.6;
+		_this.minSpeedIncrease = 0.1;
 
-						/* pitcher location */
-						_this.positionX = 480;
-						_this.positionY = 20;
+		/* interval between pitches*/
+		_this.maxPitchTime = 850;
+		_this.minPitchTime = 700;
+		_this.loadImages();
+		return _this;
+	}
 
-						/* how often to pitch*/
-						_this.pitchInterval = 800;
-						_this.loadImages();
+	_createClass(Pitcher, [{
+		key: "updatePitch",
+		value: function updatePitch() {
+			// 0,6,7,8,9,10
+			this.tickCount += 1;
+			if (this.tickCount > this.ticksPerFrame) {
+				this.tickCount = 1;
+				// Go to the next frame
+				this.frameIndex += 1;
+			}
+			// Stop swinging at end of animation
+			if (this.frameIndex == 11) {
+				this.frameIndex = 0;
+				this.pitching = false;
+			} else if (this.frameIndex == 6) {
+				this.game.ball.startBalling();
+			}
+		}
+		// Animation
 
-						_this.maxSpeedIncrease = 0.6;
-						_this.minSpeedIncrease = 0.1;
-						return _this;
+
+	}, {
+		key: "throwPitch",
+		value: function throwPitch() {
+			if (this.game.ball.frameIndex == 7) {
+				this.pitchSpeed = 10;
+				this.tickCount = 5;
+				this.pitching = true;
+				this.game.batter.throwIsHit = false;
+				this.game.ball.isHomeRun = false;
+				this.game.ball.Ydelta = 1 + (Math.random() * (this.maxSpeedIncrease - this.minSpeedIncrease) + this.minSpeedIncrease);
+				this.pitchInterval = Math.ceil(Math.random() * (this.maxPitchTime - this.minPitchTime) + this.minPitchTime);
+			}
+		}
+	}, {
+		key: "loadImages",
+		value: function loadImages() {
+			this.pitcherImages = [];
+			var drawing = new Image();
+			drawing.src = "./dist/images/pitcher.png";
+			this.pitcherImages.push(drawing);
+		}
+	}, {
+		key: "draw",
+		value: function draw(ctx) {
+			ctx.drawImage(this.pitcherImages[0], this.frameIndex * this.pitcherImages[0].width / 11, //
+			0, //
+			90, // 1314 / 7
+			120, //
+			this.positionX, // 
+			this.positionY, //
+			90, //
+			120); //
+
+			if (this.pitching) {
+				this.updatePitch();
 			}
 
-			_createClass(Pitcher, [{
-						key: "updatePitch",
-						value: function updatePitch() {
-									// 0,6,7,8,9,10
-									this.tickCount += 1;
-									if (this.tickCount > this.ticksPerFrame) {
-												this.tickCount = 1;
-												// Go to the next frame
-												this.frameIndex += 1;
-									}
-									// Stop swinging at end of animation
-									if (this.frameIndex == 11) {
-												this.frameIndex = 0;
-												this.pitching = false;
-									} else if (this.frameIndex == 6) {
-												this.game.ball.startBalling();
-									}
-						}
-						// Animation
+			// Trigger Pitches if game is playing
+			if (this.game.roundStarted && this.game.roundTime % this.pitchInterval == 0) {
+				this.throwPitch();
+			}
+		}
+	}]);
 
-
-			}, {
-						key: "throwPitch",
-						value: function throwPitch() {
-									this.pitchSpeed = 10;
-									this.tickCount = 5;
-									this.pitching = true;
-									this.game.batter.throwIsHit = false;
-									this.game.ball.isHomeRun = false;
-									this.game.ball.Ydelta = 1 + (Math.random() * (this.maxSpeedIncrease - this.minSpeedIncrease) + this.minSpeedIncrease);
-									console.log(this.game.ball.Ydelta);
-						}
-			}, {
-						key: "loadImages",
-						value: function loadImages() {
-									this.pitcherImages = [];
-									var drawing = new Image();
-									drawing.src = "./dist/images/pitcher.png";
-									this.pitcherImages.push(drawing);
-						}
-			}, {
-						key: "draw",
-						value: function draw(ctx) {
-									ctx.drawImage(this.pitcherImages[0], this.frameIndex * this.pitcherImages[0].width / 11, //
-									0, //
-									90, // 1314 / 7
-									120, //
-									this.positionX, // 
-									this.positionY, //
-									90, //
-									120); //
-
-									if (this.pitching) {
-												this.updatePitch();
-									}
-
-									// Trigger Pitches if game is playing
-									if (this.game.roundStarted && this.game.roundTime % this.pitchInterval == 0) {
-												this.throwPitch();
-									}
-						}
-			}]);
-
-			return Pitcher;
+	return Pitcher;
 }(_sprite2.default);
 
 exports.default = Pitcher;
@@ -1402,7 +1540,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Interstellar Home Run Derby
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 License: Attribution-NonCommercial-ShareAlike 3.0 United States (CC BY-NC-SA 3.0 US)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Developed By
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Lead Art 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Eric Hill  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   twitter.com/erichill1232
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   instagram.com/eric.hill.1232
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   https://www.deviantart.com/beza
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   https://nightmarenetherworld.tumblr.com/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Lead Programming
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Robert Moore
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   http://www.eugeneprogramming.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   https://www.linkedin.com/in/robertbenmoore/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Programming
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Gordon Wallace
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Q & A / System Design
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Jack Kimball
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Github Copy @ 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 https://github.com/bobby5892/InterstellarHomeRunDerby
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
 
 var Ball = function (_Sprite) {
   _inherits(Ball, _Sprite);
@@ -1420,7 +1592,7 @@ var Ball = function (_Sprite) {
     _this.Ydelta = 1;
 
     _this.balling = false;
-    _this.frameIndex = 0;
+    _this.frameIndex = 7;
     _this.tickCount = 0;
     _this.ticksPerFrame = 85;
 
@@ -1485,12 +1657,11 @@ var Ball = function (_Sprite) {
         this.frameIndex = 7;
         this.hitAnimation = false;
         // This only runs once so lets show the homerun
-
       }
       if (this.isHomeRun) {
         this.startHomeRun();
       }
-      this.positionY -= this.Ydelta * 2;
+      this.positionY -= this.Ydelta * 3;
     }
   }, {
     key: "startHomeRun",
@@ -1549,6 +1720,7 @@ var Ball = function (_Sprite) {
       // Stop the ball
       if (this.positionY > window.innerHeight) {
         this.balling = false;
+        this.frameIndex = 7;
       }
     }
   }]);
@@ -1581,7 +1753,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Interstellar Home Run Derby
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	License: Attribution-NonCommercial-ShareAlike 3.0 United States (CC BY-NC-SA 3.0 US)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Developed By
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Lead Art 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Eric Hill  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		twitter.com/erichill1232
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		instagram.com/eric.hill.1232
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		https://www.deviantart.com/beza
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		https://nightmarenetherworld.tumblr.com/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Lead Programming
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Robert Moore
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		http://www.eugeneprogramming.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		https://www.linkedin.com/in/robertbenmoore/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Programming
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Gordon Wallace
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Q & A / System Design
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Jack Kimball
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Github Copy @ 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	https://github.com/bobby5892/InterstellarHomeRunDerby
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
 
 var Scoreboard = function (_Sprite) {
 	_inherits(Scoreboard, _Sprite);
@@ -1668,7 +1874,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		Interstellar Home Run Derby
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	License: Attribution-NonCommercial-ShareAlike 3.0 United States (CC BY-NC-SA 3.0 US)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Developed By
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Lead Art 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Eric Hill  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		twitter.com/erichill1232
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		instagram.com/eric.hill.1232
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		https://www.deviantart.com/beza
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		https://nightmarenetherworld.tumblr.com/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Lead Programming
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Robert Moore
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		http://www.eugeneprogramming.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		https://www.linkedin.com/in/robertbenmoore/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Programming
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Gordon Wallace
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Q & A / System Design
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Jack Kimball
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	Github Copy @ 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	https://github.com/bobby5892/InterstellarHomeRunDerby
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
 
 var Platform = function (_Sprite) {
 	_inherits(Platform, _Sprite);
