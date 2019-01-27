@@ -26,17 +26,19 @@ class Game{
 		this.timer = null;
         this.tickTime = 100;
 
-        this.RoundTime = 0;
+        this.roundTime = 0;
  		// Round has begun
         this.roundStarted = true;
-    
+    	
+    	// Current Number of Runs
+        this.roundScore = 0;
         this.backgroundImage = null;
 	    /* Call Methods */
         /* stretch canvas */
         this.initCanvas();
 
          // Round Timer
-        this.startRoundTimer();
+        this.startroundTimer();
 
         // Start Game Rendering  - Last Method
         this.animateGame();
@@ -65,16 +67,17 @@ class Game{
             this.batter.draw(this.ctx);
             // Round Timer Update
             this.roundTimerTick();
+            
 
         }), this.tickTime;
 	}
-	startRoundTimer(){
-		this.RoundTime = 6000;
+	startroundTimer(){
+		this.roundTime = 6000;
 	}
 	roundTimerTick(){
 		if(this.roundStarted){
-			if(this.RoundTime > 0){
-				this.RoundTime--;  // so this is 100ms
+			if(this.roundTime > 0){
+				this.roundTime--;  // so this is 100ms
 				//console.log(this.roundTime);
 			}
 		}

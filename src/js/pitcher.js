@@ -48,12 +48,15 @@ export default class Pitcher extends Sprite{
         	this.frameIndex = 0;
         	this.pitching = false;
         }
+        else if (this.frameIndex==6){
+        	this.game.ball.startBalling();
+        }
     }
     // Animation
     startPitch(){
     	this.tickCount = 5;
     	this.pitching = true;
-
+    	this.game.batter.throwIsHit = false;
     }
 	throwPitch(){
 		this.pitchStart = this.game.roundTime;
@@ -69,7 +72,7 @@ export default class Pitcher extends Sprite{
 		this.pitcherImages.push(drawing);
 		
 	}
-	
+
 	draw(ctx){
    		//	ctx.drawImage(this.platformImages[0],500,40); // draw first batter image
    			ctx.drawImage(this.pitcherImages[0],
@@ -87,7 +90,7 @@ export default class Pitcher extends Sprite{
    			}
 
    			// Trigger Pitches if game is playing
-   			if(this.game.roundStarted && this.game.RoundTime%this.pitchInterval == 0){
+   			if(this.game.roundStarted && this.game.roundTime%this.pitchInterval == 0){
    				this.throwPitch();
    			}
 	}

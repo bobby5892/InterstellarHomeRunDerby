@@ -5,8 +5,8 @@ export default class Ball extends Sprite{
 		console.log("I'm a ball");
 
 		this.ballImages = null;
-		this.ballX = 490;
-		this.ballY = 20;
+		this.ballX = -100;
+		this.ballY = -100;
 		this.loadImages();
 
 		this.Ydelta = 1;
@@ -69,8 +69,8 @@ export default class Ball extends Sprite{
    				this.updateBall();
    			}
    			// Trigger Pitches if game is playing
-   			if(this.game.roundStarted && this.game.RoundTime%this.game.pitcher.pitchInterval == 0){
-   				this.startBalling();
+   			if(this.game.roundStarted && this.game.roundTime%this.game.pitcher.pitchInterval == 0){
+   				//this.startBalling();
   			}
 
   			// Stop the ball

@@ -27,9 +27,12 @@ export default class Batter extends Sprite{
 		this.keyUpAction.bind(this);
 
 	
-		
+		this.throwIsHit = false;
 		//http://www.williammalone.com/articles/create-html5-canvas-javascript-sprite-animation/
 		
+		this.maxShowFoulTimer = 300;
+		this.foultimer = 0;
+
 		this.frameIndex = 0;
 		this.tickCount = 0;
 		this.ticksPerFrame = 20;
@@ -58,6 +61,12 @@ export default class Batter extends Sprite{
    				this.updateSwing();
    			}
    			this.checkHit();
+
+   			if(this.foultimer > 0){
+   				this.yellFoul();
+   				this.foultimer -= 1;
+   			}
+   			
    	}
    	updateSwing() {
         this.tickCount += 1;
@@ -76,20 +85,41 @@ export default class Batter extends Sprite{
     	this.swinging = true;
     	this.frameIndex = 0;
     	this.tickCount = 0;
+    	
+    }
+    yellFoul(){
+		let font = "60px Arial";
+		let fontColor = "yellow";
+    	this.game.ctx.font = font;
+		this.game.ctx.fillStyle = fontColor;
+		this.game.ctx.fillText("FOUL", 440, 250);
     }
     checkHit(){
-
 		if(this.frameIndex == 5){
-			console.log("checking hit" + this.game.ball.ballY);
-			if(this.game.ball.ballY > 280  && this.game.ball.ballY < 330){
-				console.log("Hit");
+			if(this.game.ball.ballY > 270  && this.game.ball.ballY < 320){
+				console.log("hit" + this.throwIsHit);
+				if(!this.throwIsHit){
+					this.throwIsHit = true;
+					this.game.ball.balling=false;
+					this.game.ball.frameIndex=-1;
+					this.game.roundScore +=1;
+				}
 			}
+			else if((this.game.ball.ballY > 200  && this.game.ball.ballY < 269) || 
+				(this.game.ball.ballY > 321  && this.game.ball.ballY < 350)){
+				if(!this.throwIsHit){
+					console.log("fouler");
+					this.throwIsHit = true;
+					this.foultimer = this.maxShowFoulTimer;
+					this.yellFoul();
+				}
+    		}
 		}
 	}
 	keyDownAction(e,batter){
 
 		if(e.code == "Space" || e.code == "KeyW"){
-			this.batter.startSwing();
+		
 			
 		}
 		if(e.code == "ArrowLeft" || e.code == "KeyA"){
@@ -105,9 +135,9 @@ export default class Batter extends Sprite{
  	}
 	keyUpAction(e){
 		//console.log(e.code);
-		if(e.code == "Space"){
-			console.log("Up Space");
-			console.log("Ball Y:" + this.batter.game.ball.ballY);
+		if(e.code == "Space" || e.code == "KeyW"){
+			console.log(this.batter.game.ball.ballY);
+			this.batter.startSwing();
 			/* set swingTime to roundTimer
 				swingTime = swingTime - game.pitcher.pitchStart 
 				call ballHit*/

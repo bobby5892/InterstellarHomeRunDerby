@@ -4,7 +4,12 @@ export default class Scoreboard extends Sprite{
 		super(game);
 		this.game = game;
 		console.log("I'm a scoreboard");
+		this.positionX = 6;
+		this.positionY = 10;
 		this.scoreboardImages = null;
+
+		this.font = "30px Arial";
+		this.fontColor = "red";
 		this.loadImages();
 	}
 	loadImages(){
@@ -15,7 +20,22 @@ export default class Scoreboard extends Sprite{
 		this.scoreboardImages.push(drawing);
 
 	}
+	drawTime(ctx,timeText){
+		ctx.font = this.font;
+		ctx.fillStyle = this.fontColor;
+		ctx.fillText(timeText, 40, 65);
+	}
+	drawScore(ctx,scoreText){
+		ctx.font = this.font;
+		ctx.fillStyle = this.fontColor;
+		ctx.fillText(scoreText, 190, 85);
+	}
 	draw(ctx){
-   			ctx.drawImage(this.scoreboardImages[0],0,0); // draw first batter image
+   			ctx.drawImage(this.scoreboardImages[0],this.positionX ,this.positionY ); // draw first batter image
+   			this.drawTime(ctx,this.getTime()/100);
+   			this.drawScore(ctx,this.game.roundScore);
+	}
+	getTime(){
+		return this.game.roundTime;
 	}
 }
