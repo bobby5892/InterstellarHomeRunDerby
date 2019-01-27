@@ -59,7 +59,6 @@ export default class Pitcher extends Sprite{
     	this.game.batter.throwIsHit = false;
     }
 	throwPitch(){
-		this.pitchStart = this.game.roundTime;
 		this.pitchSpeed = 10;
 		this.startPitch();
 

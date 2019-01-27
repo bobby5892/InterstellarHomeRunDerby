@@ -9,6 +9,9 @@ export default class Batter extends Sprite{
 		/* Bind Event Handlers */
 		window.addEventListener('keydown', this.keyDownAction.bind(this.game));
 		window.addEventListener('keyup',   this.keyUpAction.bind(this.game));
+		// More needs done then this - need 
+		window.addEventListener('touchstart',this.keyDownAction.bind(this.game));
+		window.addEventListener('click',this.keyDownAction.bind(this.game));
 
 		/* Will hold an array of prerendered batting images */
 		this.batterImages = null;
@@ -119,10 +122,23 @@ export default class Batter extends Sprite{
 		}
 	}
 	keyDownAction(e,batter){
+		/* For touch devices */
+		if(e.code == null) {
+			if(this.batter.game.roundTime <= 0){
+				if(this.batter.game.firstload){
+					this.batter.game.firstload = false;
+				}
+				this.batter.game.startGame();
+			}
+			this.batter.startSwing();
+		}
+		/* For Keyboard / Mouse */
 		if(e.code == "Space" || e.code == "KeyW"){
 			//console.log("space" + this.batter.game.roundTime);
-			if(this.batter.game.roundTime == 0){
-			//	console.log("timer done");
+			if(this.batter.game.roundTime <= 0){
+				if(this.batter.game.firstload){
+					this.batter.game.firstload = false;
+				}
 				this.batter.game.startGame();
 			}
 			
