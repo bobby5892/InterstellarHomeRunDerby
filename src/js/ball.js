@@ -18,6 +18,8 @@ export default class Ball extends Sprite{
 
 		/* Hit Animation for Ball leaving bottom of screen going towards top */
 		this.hitAnimation = false;
+		this.showHomeRun = false;
+		this.showHomeRunTimeRemaining = 0;
 
 
 	}
@@ -25,9 +27,11 @@ export default class Ball extends Sprite{
 		this.ballImages = [];
 		let drawing = new Image();
 		drawing.src = "./dist/images/ball.png"; // can also be a remote URL e.g. http://
-
 		this.ballImages.push(drawing);
-		
+
+		drawing = new Image();
+		drawing.src = "./dist/images/homerun.png";
+		this.ballImages.push(drawing);
 	}
 	updateBall(){
 	// 0,6,7,8,9,10
@@ -63,8 +67,21 @@ export default class Ball extends Sprite{
         if(this.ballY < -90){
         	this.frameIndex = 7;
         	this.hitAnimation = false;
+        	// This only runs once so lets show the homerun
+        	this.startHomeRun();
+
         }
         this.ballY -= this.Ydelta*2;
+    }
+    startHomeRun(){
+    	this.showHomeRun = true;
+    	this.showHomeRunTimeRemaining = 250;
+    }
+    updateShowHomeRun(){
+		if(this.showHomeRunTimeRemaining > 0){
+			this.game.ctx.drawImage(this.ballImages[1],270,330);
+			this.showHomeRunTimeRemaining--;
+		}
     }
 	startBalling(){
 		this.balling = true;
@@ -94,6 +111,9 @@ export default class Ball extends Sprite{
    			if(this.hitAnimation){
    				this.updateHitAnimation();
    			}
+   			if(this.showHomeRun){
+   				this.updateShowHomeRun();
+   			}
    			// Trigger Pitches if game is playing
    			if(this.game.roundStarted && this.game.roundTime%this.game.pitcher.pitchInterval == 0){
    				//this.startBalling();
@@ -102,6 +122,6 @@ export default class Ball extends Sprite{
   			// Stop the ball
   			if(this.BallY > window.innerHeight){
   				this.balling = false;
-  			}
-	}
+			}
+  	}
 }

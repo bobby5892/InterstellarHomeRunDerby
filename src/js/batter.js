@@ -45,6 +45,9 @@ export default class Batter extends Sprite{
 		drawing.src = "./dist/images/batter.png"; // can also be a remote URL e.g. http://
 		this.batterImages.push(drawing);
 
+		drawing = new Image();
+		drawing.src = "./dist/images/foul.png"
+		this.batterImages.push(drawing);		
 	}
 	draw(ctx){
    			ctx.drawImage(this.batterImages[0],
@@ -88,11 +91,12 @@ export default class Batter extends Sprite{
     	
     }
     yellFoul(){
-		let font = "60px Arial";
+		/*let font = "60px Arial";
 		let fontColor = "yellow";
     	this.game.ctx.font = font;
 		this.game.ctx.fillStyle = fontColor;
-		this.game.ctx.fillText("FOUL", 440, 250);
+		this.game.ctx.fillText("FOUL", 440, 250);*/
+		this.game.ctx.drawImage(this.batterImages[1],440,250);
     }
     checkHit(){
 		if(this.frameIndex == 5){

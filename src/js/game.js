@@ -43,7 +43,7 @@ class Game{
         // Start Game Rendering  - Last Method
         this.animateGame();
 	}
-	initCanvas(){
+	initCanvas(){ 
 		this.canvas.width = 960;
 		this.canvas.height = 540;
 
@@ -56,7 +56,6 @@ class Game{
             this.clearCanvas();
              // Draw the platform
             this.platform.draw(this.ctx);
-          
             // Draw the pitcher
             this.pitcher.draw(this.ctx);
             // Draw the scoreboard
