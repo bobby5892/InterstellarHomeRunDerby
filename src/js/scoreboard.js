@@ -31,11 +31,11 @@ export default class Scoreboard extends Sprite{
 		ctx.fillText(scoreText, 190, 85);
 	}
 	draw(ctx){
-   			ctx.drawImage(this.scoreboardImages[0],this.positionX ,this.positionY ); // draw first batter image
-   			this.drawTime(ctx,this.getTime()/100);
-   			this.drawScore(ctx,this.game.roundScore);
+		ctx.drawImage(this.scoreboardImages[0],this.positionX ,this.positionY ); // draw first batter image
+		this.drawTime(ctx,this.getTime()/100);
+		this.drawScore(ctx,this.game.roundScore);
 	}
 	getTime(){
-		return this.game.roundTime;
+		return Math.ceil(this.game.roundTime/2.5);
 	}
 }

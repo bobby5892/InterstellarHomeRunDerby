@@ -18,7 +18,7 @@ class Game{
 		this.ball = new Ball(this);
 		this.platform = new Platform(this);
 		this.scoreboard = new Scoreboard(this);
-
+ 
 		/* Some Defaults */
 		this.backgroundColor = "#000000";
 
@@ -38,6 +38,7 @@ class Game{
         /* array of images */
         this.backgroundImage = null;
 
+        this.showPlayAgain = false;
 	    /* Call Methods */
         /* stretch canvas */
         this.initCanvas();
@@ -54,17 +55,30 @@ class Game{
 		this.canvas.height = 540;
 		this.backgroundImages = [];
 		let drawing = new Image();
-		drawing.src = "./dist/images/background.png"; // can also be a remote URL e.g. http://
+		drawing.src = "./dist/images/background.png"; // can also be a remote URL e.g. http:// // 0
 		this.backgroundImages.push(drawing);
+		
 		drawing = new Image();
-		drawing.src = "./dist/images/keys.png";
+		drawing.src = "./dist/images/background-stars.png"; // 1
+		this.backgroundImages.push(drawing);
+
+		drawing = new Image();
+		drawing.src = "./dist/images/background-stars2.png"; // 2
+		this.backgroundImages.push(drawing);
+		
+		drawing = new Image();
+		drawing.src = "./dist/images/keys.png"; // 3
+		this.backgroundImages.push(drawing);
+
+		drawing = new Image();
+		drawing.src = "./dist/images/playagain.png"; // 4
 		this.backgroundImages.push(drawing);
 
 		this.audio = [];
 		this.audio.push(new Audio('./dist/audio/47356__fotoshop__oof.wav')); //0
-		this.audio.push(new Audio('./dist/audio/fart01.wav')); // 1
-		this.audio.push(new Audio('./dist/audio/hitbat_v1.wav')); // 2
-		this.audio.push(new Audio('./dist/audio/stadiumcheer1.wav')); // 3
+		this.audio.push(new Audio('./dist/audio/fart01.wav')); // 1 / 
+		this.audio.push(new Audio('./dist/audio/hitbat_v1.wav')); // 2 / 
+		this.audio.push(new Audio('./dist/audio/stadiumcheer1.wav')); // 3 / 
 		this.audio.push(new Audio('./dist/audio/whooshbat1.wav')); //4 
 		
 
@@ -83,6 +97,12 @@ class Game{
             this.ball.draw(this.ctx);
               // Draw the Batter
             this.batter.draw(this.ctx);
+
+            // draw play again
+            if(this.showPlayAgain){
+         		this.drawPlayAgain();
+            }
+
             // Round Timer Update
             this.roundTimerTick();
             
@@ -93,23 +113,44 @@ class Game{
 		this.startroundTimer();
 		this.roundStarted = true;
 		this.roundScore = 0;
+		this.showPlayAgain = false;
 	}
 	startroundTimer(){
-		this.roundTime = 6000;
+		this.roundTime = 15000;
+		//this.roundTime = 1000;
 	}
 	roundTimerTick(){
 		if(this.roundStarted){
 			if(this.roundTime > 0){
 				this.roundTime--;  // so this is 100ms
-				//console.log(this.roundTime);
 			}
 		}
+		/* Lets show the play again */
+		if(this.roundTime == 0){
+			this.showPlayAgain = true;
+			
+		}
+	}
+	drawPlayAgain(){
+		this.ctx.drawImage(this.backgroundImages[4],375,110);
+		this.ctx.fillText("[space]", 450 , 250);
 	}
 	clearCanvas(){
-         //this.ctx.fillStyle = this.backgroundColor;
-         //this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+		/*  main background */
 		this.ctx.drawImage(this.backgroundImages[0],0,0); // draw first batter image
-		this.ctx.drawImage(this.backgroundImages[1],0,350);
+		
+		/*  stars alt */
+		if(this.roundTime%2 == 0){
+			this.ctx.drawImage(this.backgroundImages[1],0,0);
+		}
+		/*  stars alt1 */
+		else{ 
+			this.ctx.drawImage(this.backgroundImages[2],0,0);
+		}
+		
+		/*  keys */
+		this.ctx.drawImage(this.backgroundImages[3],50,360);
+
 	}
 }
 let game;
