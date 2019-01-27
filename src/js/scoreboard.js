@@ -3,7 +3,7 @@ export default class Scoreboard extends Sprite{
 	constructor(game){
 		super(game);
 		this.game = game;
-		console.log("I'm a scoreboard");
+
 		this.positionX = 6;
 		this.positionY = 10;
 		this.scoreboardImages = null;

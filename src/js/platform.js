@@ -3,9 +3,6 @@ export default class Platform extends Sprite{
 	constructor(game){
 		super(game);
 		this.game = game;
-		console.log("I'm a platform");
-		
-		
 		this.platformImages = null;
 
 		this.loadImages();

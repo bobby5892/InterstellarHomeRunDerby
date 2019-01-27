@@ -33,10 +33,16 @@ class Game{
     	// Current Number of Runs
         this.roundScore = 0;
         this.backgroundImage = null;
+
+        this.audio = null;
+        /* array of images */
+        this.backgroundImage = null;
+
 	    /* Call Methods */
         /* stretch canvas */
         this.initCanvas();
-
+      
+ 
          // Round Timer
         this.startroundTimer();
 
@@ -46,9 +52,22 @@ class Game{
 	initCanvas(){ 
 		this.canvas.width = 960;
 		this.canvas.height = 540;
+		this.backgroundImages = [];
+		let drawing = new Image();
+		drawing.src = "./dist/images/background.png"; // can also be a remote URL e.g. http://
+		this.backgroundImages.push(drawing);
+		drawing = new Image();
+		drawing.src = "./dist/images/keys.png";
+		this.backgroundImages.push(drawing);
 
-		this.backgroundImage = new Image();
-		this.backgroundImage.src = "./dist/images/background.png"; // can also be a remote URL e.g. http://
+		this.audio = [];
+		this.audio.push(new Audio('./dist/audio/47356__fotoshop__oof.wav')); //0
+		this.audio.push(new Audio('./dist/audio/fart01.wav')); // 1
+		this.audio.push(new Audio('./dist/audio/hitbat_v1.wav')); // 2
+		this.audio.push(new Audio('./dist/audio/stadiumcheer1.wav')); // 3
+		this.audio.push(new Audio('./dist/audio/whooshbat1.wav')); //4 
+		
+
 	}
 	animateGame(){
 		this.timer = setInterval(() => {
@@ -89,7 +108,8 @@ class Game{
 	clearCanvas(){
          //this.ctx.fillStyle = this.backgroundColor;
          //this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-		this.ctx.drawImage(this.backgroundImage,0,0); // draw first batter image
+		this.ctx.drawImage(this.backgroundImages[0],0,0); // draw first batter image
+		this.ctx.drawImage(this.backgroundImages[1],0,350);
 	}
 }
 let game;

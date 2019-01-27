@@ -76,6 +76,7 @@ export default class Ball extends Sprite{
     startHomeRun(){
     	this.showHomeRun = true;
     	this.showHomeRunTimeRemaining = 250;
+    	this.game.audio[3].play();
     }
     updateShowHomeRun(){
 		if(this.showHomeRunTimeRemaining > 0){

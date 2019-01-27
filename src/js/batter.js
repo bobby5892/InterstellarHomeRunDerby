@@ -91,31 +91,28 @@ export default class Batter extends Sprite{
     	
     }
     yellFoul(){
-		/*let font = "60px Arial";
-		let fontColor = "yellow";
-    	this.game.ctx.font = font;
-		this.game.ctx.fillStyle = fontColor;
-		this.game.ctx.fillText("FOUL", 440, 250);*/
+
 		this.game.ctx.drawImage(this.batterImages[1],440,250);
     }
     checkHit(){
 		if(this.frameIndex == 5){
-			if(this.game.ball.ballY > 270  && this.game.ball.ballY < 320){
+			if(this.game.ball.ballY > 290  && this.game.ball.ballY < 340){
 				//console.log("hit" + this.throwIsHit);
 				if(!this.throwIsHit){
 					this.throwIsHit = true;
 					this.game.ball.balling=false;
 					this.game.ball.frameIndex=-1;
 					this.game.roundScore +=1;
+					this.game.audio[2].play();
 					this.startHitAnimation(this.game.ball.ballX,this.game.ball.ballY);
 				}
 			}
 			else if((this.game.ball.ballY > 200  && this.game.ball.ballY < 269) || 
 				(this.game.ball.ballY > 321  && this.game.ball.ballY < 350)){
 				if(!this.throwIsHit){
-					//console.log("fouler");
 					this.throwIsHit = true;
 					this.foultimer = this.maxShowFoulTimer;
+					this.game.audio[1].play();
 					this.yellFoul();
 				}
     		}
@@ -144,7 +141,7 @@ export default class Batter extends Sprite{
 	keyUpAction(e){
 		//console.log(e.code);
 		if(e.code == "Space" || e.code == "KeyW"){
-			console.log(this.batter.game.ball.ballY);
+			//console.log(this.batter.game.ball.ballY);
 			this.batter.startSwing();
 			/* set swingTime to roundTimer
 				swingTime = swingTime - game.pitcher.pitchStart 
