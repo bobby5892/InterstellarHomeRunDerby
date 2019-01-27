@@ -56,6 +56,7 @@ export default class Pitcher extends Sprite{
     	this.tickCount = 5;
     	this.pitching = true;
     	this.game.batter.throwIsHit = false;
+    	this.game.ball.isHomeRun = false;
     }
 	throwPitch(){
 		this.pitchSpeed = 10;

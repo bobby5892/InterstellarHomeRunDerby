@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3e14d72acb5561184127"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "63d43666c44f12e5d767"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -733,7 +733,39 @@
 "use strict";
 
 
-console.log("general.js");
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Viewport = function () {
+	function Viewport() {
+		_classCallCheck(this, Viewport);
+
+		this.canvas = document.getElementsByTagName("canvas")[0];
+		this.viewport_meta = document.getElementById('viewport-meta');
+
+		this.setViewport();
+	}
+
+	_createClass(Viewport, [{
+		key: 'setViewport',
+		value: function setViewport() {
+			if (screen.width > 960) {
+				this.viewport_meta.setAttribute('content', "width=" + screen.width);
+				console.log("Setting viewport to " + screen.width);
+			} else {
+				this.viewport_meta.setAttribute('content', "width=" + screen.width + ",initial-scale=0.75,height=" + screen.height + ",user-scalable=no, minimal-ui");
+			}
+		}
+	}]);
+
+	return Viewport;
+}();
+
+var viewport = void 0;
+window.addEventListener('load', function () {
+	viewport = new Viewport();
+});
 
 /***/ })
 /******/ ]);

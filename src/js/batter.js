@@ -87,9 +87,12 @@ export default class Batter extends Sprite{
         }
     }
     startSwing(){
-    	this.swinging = true;
-    	this.frameIndex = 0;
-    	this.tickCount = 0;
+    	/* prevent animation from restarting from mashing keys */
+    	if(this.frameIndex == 0){
+	    	this.swinging = true;
+	    	this.frameIndex = 0;
+	    	this.tickCount = 0;
+	    }
     	
     }
     yellFoul(){
@@ -98,16 +101,32 @@ export default class Batter extends Sprite{
     }
     checkHit(){
 		if(this.frameIndex == 5){
+			// Home Run - strong hit
+			if(this.game.ball.positionY > 300  && this.game.ball.positionY < 315){
+				if(!this.throwIsHit){
+					this.throwIsHit = true;
+					this.game.ball.balling=false;
+					this.game.ball.frameIndex=-1;
+					this.game.roundScore += 5;
+					this.game.roundTime += 1250;
+					this.game.audio[2].play();
+					this.game.ball.isHomeRun = true;
+					this.startHitAnimation(this.game.ball.positionX,this.game.ball.positionY);
+				}
+			}
+			// Home Run barely
 			if(this.game.ball.positionY > 290  && this.game.ball.positionY < 340){
 				if(!this.throwIsHit){
 					this.throwIsHit = true;
 					this.game.ball.balling=false;
 					this.game.ball.frameIndex=-1;
 					this.game.roundScore +=1;
+					this.game.roundTime += 1250;
 					this.game.audio[2].play();
 					this.startHitAnimation(this.game.ball.positionX,this.game.ball.positionY);
 				}
 			}
+
 			else if((this.game.ball.positionY > 200  && this.game.ball.positionY < 269) || 
 				(this.game.ball.positionY > 321  && this.game.ball.positionY < 350)){
 				if(!this.throwIsHit){

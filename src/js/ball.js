@@ -20,6 +20,9 @@ export default class Ball extends Sprite{
 		this.showHomeRun = false;
 		this.showHomeRunTimeRemaining = 0;
 
+    /* Is the current hit a homerun*/
+    this.isHomeRun = false;
+
 
 	}
 	loadImages(){
@@ -67,7 +70,9 @@ export default class Ball extends Sprite{
         	this.frameIndex = 7;
         	this.hitAnimation = false;
         	// This only runs once so lets show the homerun
-        	this.startHomeRun();
+        	if(this.isHomeRun){
+            this.startHomeRun();
+          }
 
         }
         this.positionY -= this.Ydelta*2;

@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3e14d72acb5561184127"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "63d43666c44f12e5d767"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -805,7 +805,6 @@ var Game = function () {
 	function Game(game) {
 		_classCallCheck(this, Game);
 
-		console.log("game.js");
 		this.canvas = document.getElementsByTagName("canvas")[0];
 		this.ctx = this.canvas.getContext('2d');
 
@@ -1054,7 +1053,6 @@ var Batter = function (_Sprite) {
 		var _this = _possibleConstructorReturn(this, (Batter.__proto__ || Object.getPrototypeOf(Batter)).call(this, game));
 
 		_this.game = game;
-
 		/* Bind Event Handlers */
 		window.addEventListener('keydown', _this.keyDownAction.bind(_this.game));
 		window.addEventListener('keyup', _this.keyUpAction.bind(_this.game));
@@ -1071,8 +1069,8 @@ var Batter = function (_Sprite) {
 		_this.batterBoxLimitRight = 550;
 		_this.batterBoxLimitLeft = 470;
 
-		_this.batterLocationX = 480;
-		_this.batterLocationY = 315;
+		_this.positionX = 480;
+		_this.positionY = 315;
 
 		/* bind */
 		_this.keyDownAction.bind(_this);
@@ -1111,8 +1109,8 @@ var Batter = function (_Sprite) {
 			0, //
 			186, // 1314 / 7
 			154, //
-			this.batterLocationX, // 
-			this.batterLocationY, //
+			this.positionX, // 
+			this.positionY, //
 			186, //
 			154); //
 
@@ -1158,17 +1156,16 @@ var Batter = function (_Sprite) {
 		key: 'checkHit',
 		value: function checkHit() {
 			if (this.frameIndex == 5) {
-				if (this.game.ball.ballY > 290 && this.game.ball.ballY < 340) {
-					//console.log("hit" + this.throwIsHit);
+				if (this.game.ball.positionY > 290 && this.game.ball.positionY < 340) {
 					if (!this.throwIsHit) {
 						this.throwIsHit = true;
 						this.game.ball.balling = false;
 						this.game.ball.frameIndex = -1;
 						this.game.roundScore += 1;
 						this.game.audio[2].play();
-						this.startHitAnimation(this.game.ball.ballX, this.game.ball.ballY);
+						this.startHitAnimation(this.game.ball.positionX, this.game.ball.positionY);
 					}
-				} else if (this.game.ball.ballY > 200 && this.game.ball.ballY < 269 || this.game.ball.ballY > 321 && this.game.ball.ballY < 350) {
+				} else if (this.game.ball.positionY > 200 && this.game.ball.positionY < 269 || this.game.ball.positionY > 321 && this.game.ball.positionY < 350) {
 					if (!this.throwIsHit) {
 						this.throwIsHit = true;
 						this.foultimer = this.maxShowFoulTimer;
@@ -1202,13 +1199,13 @@ var Batter = function (_Sprite) {
 				}
 			}
 			if (e.code == "ArrowLeft" || e.code == "KeyA") {
-				if (this.batter.batterLocationX > this.batter.batterBoxLimitLeft) {
-					this.batter.batterLocationX--;
+				if (this.batter.positionX > this.batter.batterBoxLimitLeft) {
+					this.batter.positionX--;
 				}
 			}
 			if (e.code == "ArrowRight" || e.code == "KeyD") {
-				if (this.batter.batterLocationX < this.batter.batterBoxLimitRight) {
-					this.batter.batterLocationX++;
+				if (this.batter.positionX < this.batter.batterBoxLimitRight) {
+					this.batter.positionX++;
 				}
 			}
 		}
@@ -1217,7 +1214,7 @@ var Batter = function (_Sprite) {
 		value: function keyUpAction(e) {
 			//console.log(e.code);
 			if (e.code == "Space" || e.code == "KeyW") {
-				//console.log(this.batter.game.ball.ballY);
+				//console.log(this.batter.game.ball.positionY);
 				this.batter.startSwing();
 				/* set swingTime to roundTimer
     	swingTime = swingTime - game.pitcher.pitchStart 
@@ -1231,8 +1228,8 @@ var Batter = function (_Sprite) {
 		value: function startHitAnimation(x, y) {
 			this.game.ball.balling = false;
 			this.game.ball.hitAnimation = true;
-			this.game.ball.ballX = x;
-			this.game.ball.ballY = y;
+			this.game.ball.positionX = x;
+			this.game.ball.positionY = y;
 		}
 	}]);
 
@@ -1274,7 +1271,6 @@ var Pitcher = function (_Sprite) {
 
 						var _this = _possibleConstructorReturn(this, (Pitcher.__proto__ || Object.getPrototypeOf(Pitcher)).call(this, game));
 
-						console.log("I'm a pitcher");
 						_this.game = game;
 
 						/* For calculating ball position */
@@ -1298,8 +1294,8 @@ var Pitcher = function (_Sprite) {
 						_this.pitching = false;
 
 						/* pitcher location */
-						_this.pitcherX = 480;
-						_this.pitcherY = 20;
+						_this.positionX = 480;
+						_this.positionY = 20;
 
 						/* how often to pitch*/
 						_this.pitchInterval = 800;
@@ -1346,20 +1342,18 @@ var Pitcher = function (_Sprite) {
 						value: function loadImages() {
 									this.pitcherImages = [];
 									var drawing = new Image();
-									drawing.src = "./dist/images/pitcher.png"; // can also be a remote URL e.g. http://
-
+									drawing.src = "./dist/images/pitcher.png";
 									this.pitcherImages.push(drawing);
 						}
 			}, {
 						key: "draw",
 						value: function draw(ctx) {
-									//	ctx.drawImage(this.platformImages[0],500,40); // draw first batter image
 									ctx.drawImage(this.pitcherImages[0], this.frameIndex * this.pitcherImages[0].width / 11, //
 									0, //
 									90, // 1314 / 7
 									120, //
-									this.pitcherX, // 
-									this.pitcherY, //
+									this.positionX, // 
+									this.positionY, //
 									90, //
 									120); //
 
@@ -1412,11 +1406,9 @@ var Ball = function (_Sprite) {
 
     var _this = _possibleConstructorReturn(this, (Ball.__proto__ || Object.getPrototypeOf(Ball)).call(this, game));
 
-    console.log("I'm a ball");
-
     _this.ballImages = null;
-    _this.ballX = -100;
-    _this.ballY = -100;
+    _this.positionX = -100;
+    _this.positionY = -100;
     _this.loadImages();
 
     _this.Ydelta = 1;
@@ -1462,7 +1454,7 @@ var Ball = function (_Sprite) {
         this.frameIndex = 7;
         this.balling = false;
       }
-      this.ballY += this.Ydelta;
+      this.positionY += this.Ydelta;
     }
   }, {
     key: "updateHitAnimation",
@@ -1480,13 +1472,13 @@ var Ball = function (_Sprite) {
         this.frameIndex = 0;
       }
       /* stop */
-      if (this.ballY < -90) {
+      if (this.positionY < -90) {
         this.frameIndex = 7;
         this.hitAnimation = false;
         // This only runs once so lets show the homerun
         this.startHomeRun();
       }
-      this.ballY -= this.Ydelta * 2;
+      this.positionY -= this.Ydelta * 2;
     }
   }, {
     key: "startHomeRun",
@@ -1509,8 +1501,8 @@ var Ball = function (_Sprite) {
       this.balling = true;
       this.frameIndex = 6;
       /* Starting Location */
-      this.ballX = 490;
-      this.ballY = -20;
+      this.positionX = 490;
+      this.positionY = -20;
 
       this.destinationX = 480;
       this.destinationY = 540;
@@ -1523,8 +1515,8 @@ var Ball = function (_Sprite) {
       0, //
       50, // 1314 / 7
       90, //
-      this.ballX, // 
-      this.ballY, //
+      this.positionX, // 
+      this.positionY, //
       50, //
       90); //
 
@@ -1543,7 +1535,7 @@ var Ball = function (_Sprite) {
 
 
       // Stop the ball
-      if (this.BallY > window.innerHeight) {
+      if (this.positionY > window.innerHeight) {
         this.balling = false;
       }
     }
@@ -1676,7 +1668,8 @@ var Platform = function (_Sprite) {
 
 		_this.game = game;
 		_this.platformImages = null;
-
+		_this.positionX = 270;
+		_this.positionY = 430;
 		_this.loadImages();
 		return _this;
 	}
@@ -1693,7 +1686,7 @@ var Platform = function (_Sprite) {
 	}, {
 		key: "draw",
 		value: function draw(ctx) {
-			ctx.drawImage(this.platformImages[0], 270, 430); // draw first batter image
+			ctx.drawImage(this.platformImages[0], this.positionX, this.positionY); // draw first batter image
 		}
 	}]);
 
