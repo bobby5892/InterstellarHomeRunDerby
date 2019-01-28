@@ -27,4 +27,15 @@
 
 	Github Copy @ 
 	https://github.com/bobby5892/InterstellarHomeRunDerby
+	
+	
+	To install localy - you must have node installed
+	npm run devinstall
+	
+	This creates a local server and its at http://localhost:8080
+	npm run watch
+	
+	This creates a distribution version
+	npm run webpack
+	
 
